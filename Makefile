@@ -127,11 +127,11 @@ endif
 # rules
 #
 
-# all: $(TARGET_HEX)
-all: $(TARGET_ELF)
+all: $(TARGET_HEX)
+# all: $(TARGET_ELF)
 
-# $(TARGET_HEX): $(TARGET_ELF)
-# 	$(BIN) -O ihex $< $@
+$(TARGET_HEX): $(TARGET_ELF)
+	$(HEX) $< -omf=elf
 
 $(TARGET_ELF) : $(ASM_OBJS_EXT) $(C_OBJS_EXT)
 	$(LINK) $(LINKFLAGS) -o $@ $^ $(LIBS)
