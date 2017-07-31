@@ -158,8 +158,6 @@ clean:
 	$(BUILD_DIR)/*.d \
 	$(BUILD_DIR)/*.hex \
 	$(BUILD_DIR)/*.elf
-	# $(BUILD_DIR)/*.elf \
-	# $(BUILD_DIR)/*.map
 
 show:
 	@echo PROJECT = $(PROJECT)
