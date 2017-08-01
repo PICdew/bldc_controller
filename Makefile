@@ -58,7 +58,7 @@ LIBS     :=
 LIB_DIRS :=
 
 # Linker script files
-LD_SCRIPT := p33EP64MC202.gld
+LD_SCRIPT := p33FJ16MC102.gld
 
 # defines
 DEFINES   :=
@@ -110,7 +110,7 @@ CFLAGS = -mcpu=$(PIC_MCU) -mno-eds-warn -g -omf=elf -DXPRJ_default=default -lega
 # else
 # endif  # ......................................................................
 
-LINKFLAGS = -mcpu=$(PIC_MCU) -omf=elf -DXPRJ_default=default -legacy-libc -Wl --local-stack --defsym=__MPLAB_BUILD=1 --script=$(LD_SCRIPT) --stack=16 --check-sections --data-init --pack-data --handles --isr --no-gc-sections --fill-upper=0 --stackguard=16 --no-force-link --smart-io
+LINKFLAGS = -mcpu=$(PIC_MCU) -omf=elf -DXPRJ_default=default -legacy-libc -Wl,--local-stack,--defsym=__MPLAB_BUILD=1,--script=$(LD_SCRIPT),--stack=16,--check-sections,--data-init,--pack-data,--handles,--isr,--gc-sections,--fill-upper=0,--stackguard=16,--no-force-link,--smart-io,-Map="$(BUILD_DIR)/$(PROJECT).map"
 
 ASM_OBJS     := $(patsubst %.s,%.o,  $(notdir $(ASM_SRCS)))
 C_OBJS       := $(patsubst %.c,%.o,  $(notdir $(C_SRCS)))
@@ -137,7 +137,7 @@ $(TARGET_HEX): $(TARGET_ELF)
 	$(HEX) $< -omf=elf
 
 $(TARGET_ELF) : $(ASM_OBJS_EXT) $(C_OBJS_EXT)
-	$(LINK) $(LINKFLAGS) -o $@ $^ $(LIBS)
+	$(LINK) -o $@ $^ $(LIBS) $(LINKFLAGS)
 
 $(BUILD_DIR)/%.d : %.c
 	$(CC) -MM -MT $(@:.d=.o) $(CFLAGS) $< > $@
@@ -160,7 +160,8 @@ clean:
 	-$(RM) $(BUILD_DIR)/*.o \
 	$(BUILD_DIR)/*.d \
 	$(BUILD_DIR)/*.hex \
-	$(BUILD_DIR)/*.elf
+	$(BUILD_DIR)/*.elf \
+	$(BUILD_DIR)/*.map
 
 show:
 	@echo PROJECT = $(PROJECT)
