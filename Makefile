@@ -25,16 +25,16 @@ PROJECT     := bldc-controller
 
 # list of all source directories used by this project
 VPATH = \
-	./source/qpn/source \
-	./source/utils/source \
-	./source/system/source
+	source/qpn/source \
+	source/utils/source \
+	source/system/source
 
 # list of all include directories needed by this project
 INCLUDES  = \
-	-I./source/qpn/include \
-	-I./source/qpn/ports/pic24_dspic/qk \
-	-I./source/utils/include \
-	-I./source/system/include
+	-Isource/qpn/include \
+	-Isource/qpn/ports/pic24_dspic/qk \
+	-Isource/utils/include \
+	-Isource/system/include
 
 #-----------------------------------------------------------------------------
 # files
@@ -45,7 +45,10 @@ ASM_SRCS :=
 
 # C source files
 C_SRCS := \
-	main.c
+	main.c \
+	qepn.c \
+	qfn.c \
+	qkn.c
 
 # C++ source files
 #CPP_SRCS :=
@@ -103,7 +106,7 @@ BUILD_DIR := build/debug
 
 ASFLAGS = -mcpu=$(PIC_MCU) -omf=elf -DXPRJ_default=default -no-legacy-libc -Wa --defsym=__MPLAB_BUILD=1 -g --no-relax
 
-CFLAGS = -mcpu=$(PIC_MCU) -mno-eds-warn -g -omf=elf -DXPRJ_default=default -legacy-libc -O0 -I$(INCLUDES) -msmart-io=1 -Wall -msfr-warn=off
+CFLAGS = -mcpu=$(PIC_MCU) -mno-eds-warn -g -omf=elf -DXPRJ_default=default -legacy-libc -O0 $(INCLUDES) -msmart-io=1 -Wall -msfr-warn=off
 # else
 # endif  # ......................................................................
 

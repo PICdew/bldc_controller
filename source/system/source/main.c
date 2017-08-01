@@ -15,10 +15,27 @@
  */
 
 #include "bldc_controller.h"
+#include "qpn.h"
+
+QActiveCB const Q_ROM QF_active[] = {
+    { (QActive *)0,           (QEvt *)0,        0U                      },
+};
 
 /*******************************************************************************
  * Code
  ******************************************************************************/
+void Q_onAssert(char const Q_ROM * const Q_ROM_VAR module, int loc)
+{
+}
+
+void QK_onIdle(void)
+{
+}
+
+void QF_onStartup(void)
+{
+}
+
 int main(void)
 {
     return 0;
