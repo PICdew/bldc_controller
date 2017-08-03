@@ -104,13 +104,20 @@ RM    := rm
 # ifeq (debug, $(CONF)) # Debug configuration ...................................
 BUILD_DIR := build/debug
 
-ASFLAGS = -mcpu=$(PIC_MCU) -omf=elf -DXPRJ_default=default -no-legacy-libc -Wa --defsym=__MPLAB_BUILD=1 -g --no-relax
+ASFLAGS = -mcpu=$(PIC_MCU) -omf=elf -DXPRJ_default=default -no-legacy-libc \
+          -Wa --defsym=__MPLAB_BUILD=1 -g --no-relax
 
-CFLAGS = -mcpu=$(PIC_MCU) -mno-eds-warn -g -omf=elf -DXPRJ_default=default -legacy-libc -O0 $(INCLUDES) -msmart-io=1 -Wall -msfr-warn=off
+CFLAGS = -mcpu=$(PIC_MCU) -mno-eds-warn -g -omf=elf -DXPRJ_default=default \
+         -legacy-libc -O0 $(INCLUDES) -msmart-io=1 -Wall -msfr-warn=off \
+		 -ffunction-sections -fdata-sections
 # else
 # endif  # ......................................................................
 
-LINKFLAGS = -mcpu=$(PIC_MCU) -omf=elf -DXPRJ_default=default -legacy-libc -Wl,--local-stack,--defsym=__MPLAB_BUILD=1,--script=$(LD_SCRIPT),--stack=16,--check-sections,--data-init,--pack-data,--handles,--isr,--gc-sections,--fill-upper=0,--stackguard=16,--no-force-link,--smart-io,-Map="$(BUILD_DIR)/$(PROJECT).map"
+LINKFLAGS = -mcpu=$(PIC_MCU) -omf=elf -DXPRJ_default=default -legacy-libc -Wl, \
+            --local-stack,--defsym=__MPLAB_BUILD=1,--script=$(LD_SCRIPT), \
+			--stack=16,--check-sections,--data-init,--pack-data,--handles, \
+			--isr, --gc-sections,--fill-upper=0,--stackguard=16,--no-force-link, \
+			--smart-io,-Map="$(BUILD_DIR)/$(PROJECT).map"
 
 ASM_OBJS     := $(patsubst %.s,%.o,  $(notdir $(ASM_SRCS)))
 C_OBJS       := $(patsubst %.c,%.o,  $(notdir $(C_SRCS)))
