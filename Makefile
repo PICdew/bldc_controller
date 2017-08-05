@@ -58,13 +58,13 @@ LIBS     :=
 LIB_DIRS :=
 
 # Linker script files
-LD_SCRIPT := p33FJ16MC102.gld
+LD_SCRIPT := p33EP256MC506.gld
 
 # defines
 DEFINES   :=
 
 # PIC_MCU type
-PIC_MCU=33FJ16MC102
+PIC_MCU=33EP256MC506
 
 #-----------------------------------------------------------------------------
 # XC16 toolset (NOTE: You need to adjust to your machine)
