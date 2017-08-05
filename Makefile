@@ -25,12 +25,14 @@ PROJECT     := bldc-controller
 
 # list of all source directories used by this project
 VPATH = \
+	source/bsp/source \
 	source/qpn/source \
 	source/utils/source \
 	source/system/source
 
 # list of all include directories needed by this project
 INCLUDES  = \
+	-Isource/bsp/include \
 	-Isource/qpn/include \
 	-Isource/qpn/ports/pic24_dspic/qk \
 	-Isource/utils/include \
@@ -45,10 +47,11 @@ ASM_SRCS :=
 
 # C source files
 C_SRCS := \
-	main.c \
 	qepn.c \
 	qfn.c \
-	qkn.c
+	qkn.c \
+	bsp.c \
+	main.c
 
 # C++ source files
 #CPP_SRCS :=
