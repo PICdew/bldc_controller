@@ -28,7 +28,8 @@ VPATH = \
 	source/bsp/source \
 	source/qpn/source \
 	source/utils/source \
-	source/system/source
+	source/system/source \
+	source/blinky/source
 
 # list of all include directories needed by this project
 INCLUDES  = \
@@ -36,7 +37,8 @@ INCLUDES  = \
 	-Isource/qpn/include \
 	-Isource/qpn/ports/pic24_dspic/qk \
 	-Isource/utils/include \
-	-Isource/system/include
+	-Isource/system/include \
+	-Isource/blinky/include
 
 #-----------------------------------------------------------------------------
 # files
@@ -51,7 +53,8 @@ C_SRCS := \
 	qfn.c \
 	qkn.c \
 	bsp.c \
-	main.c
+	main.c \
+	blinky.c
 
 # C++ source files
 #CPP_SRCS :=

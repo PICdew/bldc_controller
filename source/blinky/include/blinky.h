@@ -14,40 +14,34 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "qpn.h"
-#include "bsp.h"
-#include "bldc_controller.h"
-#include "blinky.h"
+#ifndef __BLINKY_H__
+#define __BLINKY_H__
 
 /*******************************************************************************
- * Variables
+ * Definitions
  ******************************************************************************/
-/* Event queue storage for Blinky */
-static QEvt l_blinkyQSto[10U];
-
-/* QF_active[] array defines all active object control blocks */
-QActiveCB const Q_ROM QF_active[] = {
-    { (QActive *)0U,          (QEvt *)0U,       0U                      },
-    { (QActive *)&AO_Blinky,  l_blinkyQSto,     Q_DIM(l_blinkyQSto)     }
+enum _blinky_signals
+{
+    TIMEOUT_SIG = Q_USER_SIG, /* the last published signal */
 };
 
+extern struct _blinky AO_Blinky;
+
 /*******************************************************************************
- * Code
+ * API
  ******************************************************************************/
-int main(void)
-{
-    /* Instantiate all Blinky AO */
-    Blinky_Ctor();
 
-    /* Initialize the QF-nano framework */
-    QF_init(Q_DIM(QF_active));
+#if defined(__cplusplus)
+extern "C" {
+#endif /* __cplusplus */
 
-    /* Initialize the Board Support Package */
-    BSP_Init();
+void Blinky_Ctor(void);
 
-    /* Transfer control to QF-nano */
-    return QF_run();
+#if defined(__cplusplus)
 }
+#endif /* __cplusplus */
+
+#endif /* __BLINKY_H__ */
 
 /*******************************************************************************
  * EOF
