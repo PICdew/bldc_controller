@@ -42,7 +42,7 @@
 #define QF_INT_DISABLE() __builtin_disi(0x3FFFU)
 #define QF_INT_ENABLE() __builtin_disi(0x0000U)
 
-/*#define QF_ISR_NEST*/  /* nesting of ISRs not allowed */
+/*#define QF_ISR_NEST*/ /* nesting of ISRs not allowed */
 
 #define QK_ISR_ENTRY() ((void)0)
 #define QK_ISR_EXIT()                       \
