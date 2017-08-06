@@ -102,13 +102,11 @@ void TMR1_Initialize (void)
 }
 
 
-
-void __attribute__ ( ( interrupt, no_auto_psv ) ) _T1Interrupt (  )
+QK_ISR(no_auto_psv) _T1Interrupt(void)
 {
     /* Check if the Timer Interrupt/Status is set */
 
     //***User Area Begin
-    QK_ISR_ENTRY();
 
     // ticker function call;
     // ticker is 1 -> Callback function gets called everytime this ISR executes

@@ -35,24 +35,60 @@
 #ifndef qfn_port_h
 #define qfn_port_h
 
-/* maximum # active objects--must match EXACTLY the QF_active[] definition  */
-#define QF_MAX_ACTIVE 1U
-
 /* task-level interrupt nesting policy, see NOTE01 */
 #define QF_INT_DISABLE() __builtin_disi(0x3FFFU)
 #define QF_INT_ENABLE() __builtin_disi(0x0000U)
 
-/*#define QF_ISR_NEST*/ /* nesting of ISRs not allowed */
+/* ISR-level interrupt locking policy for PIC24/dsPIC, see NOTE02 */
+#define QF_ISR_NEST
 
-#define QK_ISR_ENTRY() ((void)0)
-#define QK_ISR_EXIT()                       \
-    do                                      \
-    {                                       \
-        if (QK_sched_() != (uint_fast8_t)0) \
-        {                                   \
-            QK_activate_();                 \
-        }                                   \
-    } while (0)
+#define QK_ISR(psv_)                                   \
+    void __attribute__((__interrupt__(__preprologue__( \
+                            "push   RCOUNT        \n"  \
+                            "push.d w0            \n"  \
+                            "mov.w  [w15-8],w0    \n"  \
+                            "lsr.w  w0,#13,w1     \n"  \
+                            "mov.w  #1,w0         \n"  \
+                            "sl     w0,w1,w0      \n"  \
+                            "mov    #_QK_attr_,w1 \n"  \
+                            "add    #4,w1         \n"  \
+                            "ior.b  w0,[w1],[w1]  \n"  \
+                            "bra    .+6           ")), \
+                        psv_))
+
+#define QK_ISR_EXIT()                             \
+    do                                            \
+    {                                             \
+        register uint16_t this_sr;                \
+        __asm__ volatile(                         \
+            "mov.w  SR,%0         \n"             \
+            "lsr    %0,#5,w0      \n"             \
+            "and.w  w0,#7,w0      \n"             \
+            "mov.w  #1,w1         \n"             \
+            "sl     w1,w0,w0      \n"             \
+            "ior.b  #1,w0         \n"             \
+            "com.b  w0,w0         \n"             \
+            "disi   #0x3FFF       \n"             \
+            "mov    #_QK_attr_,w1 \n"             \
+            "add    #4,w1         \n"             \
+            "and.b  w0,[w1],[w1]  \n"             \
+            : "=r"(this_sr)                       \
+            :                                     \
+            : "w0", "w1");                        \
+        if (QK_attr_.intNest == 0)                \
+        {                                         \
+            uint8_t p = QK_sched_();              \
+            if (p != (uint8_t)0)                  \
+            {                                     \
+                __asm__ volatile("clr.b SR");     \
+                QK_activate_();                   \
+                __asm__ volatile("mov.w %0,SR"    \
+                                 :                \
+                                 : "r"(this_sr)); \
+            }                                     \
+        }                                         \
+        __asm__ volatile("disi #0x0000");         \
+    } while (0);
 
 /* fast log-base-2 with FBCL instruction, NOTE03 */
 #define QF_LOG2(n_) ((uint8_t)(15 + __builtin_fbcl(n_)))
