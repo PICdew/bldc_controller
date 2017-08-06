@@ -48,6 +48,7 @@
 */
 
 #include <xc.h>
+#include "qpn.h"
 #include "tmr1.h"
 
 /**
@@ -107,6 +108,7 @@ void __attribute__ ( ( interrupt, no_auto_psv ) ) _T1Interrupt (  )
     /* Check if the Timer Interrupt/Status is set */
 
     //***User Area Begin
+    QK_ISR_ENTRY();
 
     // ticker function call;
     // ticker is 1 -> Callback function gets called everytime this ISR executes
@@ -117,6 +119,8 @@ void __attribute__ ( ( interrupt, no_auto_psv ) ) _T1Interrupt (  )
     tmr1_obj.count++;
     tmr1_obj.timerElapsed = true;
     IFS0bits.T1IF = false;
+
+    QK_ISR_EXIT();
 }
 
 
