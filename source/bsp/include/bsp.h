@@ -18,6 +18,7 @@
 #define __BSP_H__
 
 #include "../source/mcc_generated_files/pin_manager.h"
+#include "../source/mcc_generated_files/interrupt_manager.h"
 
 /*******************************************************************************
  * Definitions
