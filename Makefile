@@ -26,6 +26,7 @@ PROJECT     := bldc-controller
 # list of all source directories used by this project
 VPATH = \
 	source/bsp/source \
+	source/bsp/source/mcc_generated_files \
 	source/qpn/source \
 	source/utils/source \
 	source/system/source \
@@ -53,6 +54,11 @@ C_SRCS := \
 	qfn.c \
 	qkn.c \
 	bsp.c \
+	interrupt_manager.c \
+	mcc.c \
+	pin_manager.c \
+	tmr1.c \
+	traps.c \
 	main.c \
 	blinky.c
 

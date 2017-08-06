@@ -16,12 +16,14 @@
 
 #include "qpn.h"
 #include "bsp.h"
+#include "mcc_generated_files/mcc.h"
 
 /*******************************************************************************
  * Code
  ******************************************************************************/
 void QF_onStartup(void)
 {
+    INTERRUPT_GlobalEnable();
 }
 
 void QK_onIdle(void)
@@ -34,8 +36,14 @@ void Q_onAssert(char const Q_ROM * const Q_ROM_VAR module, int loc)
     {}
 }
 
+void TMR1_CallBack(void)
+{
+    QF_tickXISR(0U);
+}
+
 void BSP_Init(void)
 {
+    SYSTEM_Initialize();
 }
 
 /*******************************************************************************
