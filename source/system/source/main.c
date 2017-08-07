@@ -25,11 +25,13 @@
 /* Event queue storage for Blinky */
 static QEvt l_blinkyQSto[10U];
 
+/* clang-format off */
 /* QF_active[] array defines all active object control blocks */
 QActiveCB const Q_ROM QF_active[] = {
     { (QActive *)0U,          (QEvt *)0U,       0U                      },
     { (QActive *)&AO_Blinky,  l_blinkyQSto,     Q_DIM(l_blinkyQSto)     }
 };
+/* clang-format on */
 
 /*******************************************************************************
  * Code
