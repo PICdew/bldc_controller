@@ -76,7 +76,7 @@
     </code>
 
 */
-#define IO_RA0_SetHigh()          _LATA0 = 1
+#define IO_RA0_SetHigh() _LATA0 = 1
 /**
   @Summary
     Sets the GPIO pin, RA0, low using LATA0.
@@ -100,7 +100,7 @@
     </code>
 
 */
-#define IO_RA0_SetLow()           _LATA0 = 0
+#define IO_RA0_SetLow() _LATA0 = 0
 /**
   @Summary
     Toggles the GPIO pin, RA0, using LATA0.
@@ -124,7 +124,7 @@
     </code>
 
 */
-#define IO_RA0_Toggle()           _LATA0 ^= 1
+#define IO_RA0_Toggle() _LATA0 ^= 1
 /**
   @Summary
     Reads the value of the GPIO pin, RA0.
@@ -150,7 +150,7 @@
     </code>
 
 */
-#define IO_RA0_GetValue()         _RA0
+#define IO_RA0_GetValue() _RA0
 /**
   @Summary
     Configures the GPIO pin, RA0, as an input.
@@ -174,7 +174,7 @@
     </code>
 
 */
-#define IO_RA0_SetDigitalInput()  _TRISA0 = 1
+#define IO_RA0_SetDigitalInput() _TRISA0 = 1
 /**
   @Summary
     Configures the GPIO pin, RA0, as an output.

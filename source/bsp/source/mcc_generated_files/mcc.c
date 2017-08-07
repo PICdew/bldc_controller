@@ -45,35 +45,38 @@
 // Configuration bits: selected in the GUI
 
 // FICD
-#pragma config ICS = PGD1    // ICD Communication Channel Select bits->Communicate on PGEC1 and PGED1
-#pragma config JTAGEN = OFF    // JTAG Enable bit->JTAG is disabled
+#pragma config ICS = PGD1   // ICD Communication Channel Select bits->Communicate on PGEC1 and PGED1
+#pragma config JTAGEN = OFF // JTAG Enable bit->JTAG is disabled
 
 // FPOR
-#pragma config ALTI2C1 = OFF    // Alternate I2C1 pins->I2C1 mapped to SDA1/SCL1 pins
-#pragma config ALTI2C2 = OFF    // Alternate I2C2 pins->I2C2 mapped to SDA2/SCL2 pins
-#pragma config WDTWIN = WIN25    // Watchdog Window Select bits->WDT Window is 25% of WDT period
+#pragma config ALTI2C1 = OFF  // Alternate I2C1 pins->I2C1 mapped to SDA1/SCL1 pins
+#pragma config ALTI2C2 = OFF  // Alternate I2C2 pins->I2C2 mapped to SDA2/SCL2 pins
+#pragma config WDTWIN = WIN25 // Watchdog Window Select bits->WDT Window is 25% of WDT period
 
 // FWDT
-#pragma config WDTPOST = PS32768    // Watchdog Timer Postscaler bits->1:32768
+#pragma config WDTPOST = PS32768 // Watchdog Timer Postscaler bits->1:32768
 #pragma config WDTPRE = PR128    // Watchdog Timer Prescaler bit->1:128
-#pragma config PLLKEN = ON    // PLL Lock Enable bit->Clock switch to PLL source will wait until the PLL lock signal is valid.
-#pragma config WINDIS = OFF    // Watchdog Timer Window Enable bit->Watchdog Timer in Non-Window mode
-#pragma config FWDTEN = OFF    // Watchdog Timer Enable bit->Watchdog timer enabled/disabled by user software
+#pragma config PLLKEN = \
+    ON // PLL Lock Enable bit->Clock switch to PLL source will wait until the PLL lock signal is valid.
+#pragma config WINDIS = OFF // Watchdog Timer Window Enable bit->Watchdog Timer in Non-Window mode
+#pragma config FWDTEN = OFF // Watchdog Timer Enable bit->Watchdog timer enabled/disabled by user software
 
 // FOSC
-#pragma config POSCMD = NONE    // Primary Oscillator Mode Select bits->Primary Oscillator disabled
-#pragma config OSCIOFNC = ON    // OSC2 Pin Function bit->OSC2 is general purpose digital I/O pin
-#pragma config IOL1WAY = ON    // Peripheral pin select configuration->Allow only one reconfiguration
-#pragma config FCKSM = CSDCMD    // Clock Switching Mode bits->Both Clock switching and Fail-safe Clock Monitor are disabled
+#pragma config POSCMD = NONE // Primary Oscillator Mode Select bits->Primary Oscillator disabled
+#pragma config OSCIOFNC = ON // OSC2 Pin Function bit->OSC2 is general purpose digital I/O pin
+#pragma config IOL1WAY = ON  // Peripheral pin select configuration->Allow only one reconfiguration
+#pragma config FCKSM = \
+    CSDCMD // Clock Switching Mode bits->Both Clock switching and Fail-safe Clock Monitor are disabled
 
 // FOSCSEL
-#pragma config FNOSC = FRC    // Oscillator Source Selection->Internal Fast RC (FRC)
-#pragma config PWMLOCK = ON    // PWM Lock Enable bit->Certain PWM registers may only be written after key sequence
-#pragma config IESO = ON    // Two-speed Oscillator Start-up Enable bit->Start up device with FRC, then switch to user-selected oscillator source
+#pragma config FNOSC = FRC  // Oscillator Source Selection->Internal Fast RC (FRC)
+#pragma config PWMLOCK = ON // PWM Lock Enable bit->Certain PWM registers may only be written after key sequence
+#pragma config IESO = ON    // Two-speed Oscillator Start-up Enable bit->Start up device with FRC, then switch to
+                            // user-selected oscillator source
 
 // FGS
-#pragma config GWRP = OFF    // General Segment Write-Protect bit->General Segment may be written
-#pragma config GCP = OFF    // General Segment Code-Protect bit->General Segment Code protect is Disabled
+#pragma config GWRP = OFF // General Segment Write-Protect bit->General Segment may be written
+#pragma config GCP = OFF  // General Segment Code-Protect bit->General Segment Code protect is Disabled
 
 #include "mcc.h"
 
@@ -107,21 +110,21 @@ void SYSTEM_Initialize(void)
 
 void OSCILLATOR_Initialize(void)
 {
-    // CF no clock failure; NOSC FRC; CLKLOCK unlocked; OSWEN Switch is Complete; 
-    __builtin_write_OSCCONL((uint8_t) (0x0 & 0x00FF));
-    // FRCDIV FRC/2; PLLPRE 2; DOZE 1:8; PLLPOST 1:2; DOZEN disabled; ROI disabled; 
+    // CF no clock failure; NOSC FRC; CLKLOCK unlocked; OSWEN Switch is Complete;
+    __builtin_write_OSCCONL((uint8_t)(0x0 & 0x00FF));
+    // FRCDIV FRC/2; PLLPRE 2; DOZE 1:8; PLLPOST 1:2; DOZEN disabled; ROI disabled;
     CLKDIV = 0x3100;
-    // TUN Center frequency; 
+    // TUN Center frequency;
     OSCTUN = 0x0;
-    // ROON disabled; ROSEL disabled; RODIV Base clock value; ROSSLP disabled; 
+    // ROON disabled; ROSEL disabled; RODIV Base clock value; ROSSLP disabled;
     REFOCON = 0x0;
-    // PLLDIV 50; 
+    // PLLDIV 50;
     PLLFBD = 0x32;
-    // RND disabled; SATB disabled; SATA disabled; ACCSAT disabled; 
-	CORCONbits.RND = 0;
-	CORCONbits.SATB = 0;
-	CORCONbits.SATA = 0;
-	CORCONbits.ACCSAT = 0;
+    // RND disabled; SATB disabled; SATA disabled; ACCSAT disabled;
+    CORCONbits.RND = 0;
+    CORCONbits.SATB = 0;
+    CORCONbits.SATA = 0;
+    CORCONbits.ACCSAT = 0;
 }
 
 uint16_t SYSTEM_GetResetCause(void)
@@ -129,47 +132,47 @@ uint16_t SYSTEM_GetResetCause(void)
     return RCON;
 }
 
-void __attribute__ ((weak)) SYSTEM_ResetCauseHandler(void)
+void __attribute__((weak)) SYSTEM_ResetCauseHandler(void)
 {
     uint16_t resetCause = SYSTEM_GetResetCause();
-    if(SYSTEM_ResetCauseFromTrap(resetCause))
-    { 
-      SYSTEM_ResetCauseClear(RESET_MASK_TRAPR); 
-      //Do something 
+    if (SYSTEM_ResetCauseFromTrap(resetCause))
+    {
+        SYSTEM_ResetCauseClear(RESET_MASK_TRAPR);
+        // Do something
     }
-    if(SYSTEM_ResetCauseFromIllegalOpcode(resetCause))
-    { 
-      SYSTEM_ResetCauseClear(RESET_MASK_IOPUWR); 
-      //Do something 
+    if (SYSTEM_ResetCauseFromIllegalOpcode(resetCause))
+    {
+        SYSTEM_ResetCauseClear(RESET_MASK_IOPUWR);
+        // Do something
     }
-    if(SYSTEM_ResetCauseFromConfigurationMismatch(resetCause))
-    { 
-      SYSTEM_ResetCauseClear(RESET_MASK_CM); 
-      //Do something 
+    if (SYSTEM_ResetCauseFromConfigurationMismatch(resetCause))
+    {
+        SYSTEM_ResetCauseClear(RESET_MASK_CM);
+        // Do something
     }
-    if(SYSTEM_ResetCauseFromExternal(resetCause))
-    { 
-      SYSTEM_ResetCauseClear(RESET_MASK_EXTR); 
-      //Do something 
+    if (SYSTEM_ResetCauseFromExternal(resetCause))
+    {
+        SYSTEM_ResetCauseClear(RESET_MASK_EXTR);
+        // Do something
     }
-    if(SYSTEM_ResetCauseFromSoftware(resetCause))
-    { 
-      SYSTEM_ResetCauseClear(RESET_MASK_SWR); 
-      //Do something 
+    if (SYSTEM_ResetCauseFromSoftware(resetCause))
+    {
+        SYSTEM_ResetCauseClear(RESET_MASK_SWR);
+        // Do something
     }
-    if(SYSTEM_ResetCauseFromWatchdogTimer(resetCause))
-    { 
-      SYSTEM_ResetCauseClear(RESET_MASK_WDTO); 
-      //Do something 
+    if (SYSTEM_ResetCauseFromWatchdogTimer(resetCause))
+    {
+        SYSTEM_ResetCauseClear(RESET_MASK_WDTO);
+        // Do something
     }
 }
 
 bool SYSTEM_ResetCauseFromTrap(uint16_t resetCause)
 {
     bool resetStatus = false;
-    if(resetCause & RESET_MASK_TRAPR)
-    { 
-      resetStatus = true; 
+    if (resetCause & RESET_MASK_TRAPR)
+    {
+        resetStatus = true;
     }
     return resetStatus;
 }
@@ -177,9 +180,9 @@ bool SYSTEM_ResetCauseFromTrap(uint16_t resetCause)
 bool SYSTEM_ResetCauseFromIllegalOpcode(uint16_t resetCause)
 {
     bool resetStatus = false;
-    if(resetCause & RESET_MASK_IOPUWR)
-    { 
-      resetStatus = true; 
+    if (resetCause & RESET_MASK_IOPUWR)
+    {
+        resetStatus = true;
     }
     return resetStatus;
 }
@@ -187,9 +190,9 @@ bool SYSTEM_ResetCauseFromIllegalOpcode(uint16_t resetCause)
 bool SYSTEM_ResetCauseFromConfigurationMismatch(uint16_t resetCause)
 {
     bool resetStatus = false;
-    if(resetCause & RESET_MASK_CM)
-    { 
-      resetStatus = true; 
+    if (resetCause & RESET_MASK_CM)
+    {
+        resetStatus = true;
     }
     return resetStatus;
 }
@@ -197,9 +200,9 @@ bool SYSTEM_ResetCauseFromConfigurationMismatch(uint16_t resetCause)
 bool SYSTEM_ResetCauseFromExternal(uint16_t resetCause)
 {
     bool resetStatus = false;
-    if(resetCause & RESET_MASK_EXTR)
-    { 
-      resetStatus = true; 
+    if (resetCause & RESET_MASK_EXTR)
+    {
+        resetStatus = true;
     }
     return resetStatus;
 }
@@ -207,9 +210,9 @@ bool SYSTEM_ResetCauseFromExternal(uint16_t resetCause)
 bool SYSTEM_ResetCauseFromSoftware(uint16_t resetCause)
 {
     bool resetStatus = false;
-    if(resetCause & RESET_MASK_SWR)
-    { 
-      resetStatus = true; 
+    if (resetCause & RESET_MASK_SWR)
+    {
+        resetStatus = true;
     }
     return resetStatus;
 }
@@ -217,21 +220,21 @@ bool SYSTEM_ResetCauseFromSoftware(uint16_t resetCause)
 bool SYSTEM_ResetCauseFromWatchdogTimer(uint16_t resetCause)
 {
     bool resetStatus = false;
-    if(resetCause & RESET_MASK_WDTO)
-    { 
-      resetStatus = true;
+    if (resetCause & RESET_MASK_WDTO)
+    {
+        resetStatus = true;
     }
     return resetStatus;
 }
 
 void SYSTEM_ResetCauseClear(RESET_MASKS resetFlagMask)
-{ 
-     RCON = RCON & (~resetFlagMask); 
-} 
+{
+    RCON = RCON & (~resetFlagMask);
+}
 
 void SYSTEM_ResetCauseClearAll()
-{ 
-    RCON = 0x00; 
+{
+    RCON = 0x00;
 }
 /**
  End of File

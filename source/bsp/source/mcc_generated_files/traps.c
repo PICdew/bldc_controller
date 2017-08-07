@@ -1,5 +1,5 @@
 /**
-  System Traps Generated Driver File 
+  System Traps Generated Driver File
 
   @Company:
     Microchip Technology Inc.
@@ -13,7 +13,7 @@
 
   @Description:
     This source file provides implementations for PIC24 / dsPIC33 / PIC32MM MCUs traps.
-    Generation Information : 
+    Generation Information :
         Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - pic24-dspic-pic32mm : v1.35
         Device            :  dsPIC33EP256MC506
     The generated drivers are tested against the following:
@@ -58,19 +58,19 @@
 static uint16_t TRAPS_error_code = -1;
 
 /**
- * Halts 
- * 
+ * Halts
+ *
  * @param code error code
  */
 void __attribute__((naked, noreturn, weak)) TRAPS_halt_on_error(uint16_t code)
 {
     TRAPS_error_code = code;
-#ifdef __DEBUG    
+#ifdef __DEBUG
     __builtin_software_breakpoint();
-    /* If we are in debug mode, cause a software breakpoint in the debugger */
+/* If we are in debug mode, cause a software breakpoint in the debugger */
 #endif
-    while(1);
-    
+    while (1)
+        ;
 }
 
 /**
@@ -80,23 +80,17 @@ void __attribute__((naked, noreturn, weak)) TRAPS_halt_on_error(uint16_t code)
 inline static void use_failsafe_stack(void)
 {
     static uint8_t failsafe_stack[32];
-    asm volatile (
-        "   mov    %[pstack], W15\n"
-        :
-        : [pstack]"r"(failsafe_stack)
-    );
-/* Controls where the stack pointer limit is, relative to the end of the
- * failsafe stack
- */    
-    SPLIM = (uint16_t)(((uint8_t *)failsafe_stack) + sizeof(failsafe_stack) 
-            - FAILSAFE_STACK_GUARDSIZE);
+    asm volatile("   mov    %[pstack], W15\n" : : [pstack] "r"(failsafe_stack));
+    /* Controls where the stack pointer limit is, relative to the end of the
+     * failsafe stack
+     */
+    SPLIM = (uint16_t)(((uint8_t *)failsafe_stack) + sizeof(failsafe_stack) - FAILSAFE_STACK_GUARDSIZE);
 }
-
 
 /** Oscillator Fail Trap vector**/
 void ERROR_HANDLER_NORETURN _OscillatorFail(void)
 {
-    INTCON1bits.OSCFAIL = 0;  //Clear the trap flag
+    INTCON1bits.OSCFAIL = 0; // Clear the trap flag
     TRAPS_halt_on_error(TRAPS_OSC_FAIL);
 }
 /** Stack Error Trap Vector**/
@@ -106,48 +100,47 @@ void ERROR_HANDLER_NORETURN _StackError(void)
      * means that we cannot trust the stack to operate correctly unless
      * we set the stack pointer to a safe place.
      */
-    use_failsafe_stack(); 
-    INTCON1bits.STKERR = 0;  //Clear the trap flag
+    use_failsafe_stack();
+    INTCON1bits.STKERR = 0; // Clear the trap flag
     TRAPS_halt_on_error(TRAPS_STACK_ERR);
 }
 /** Address error Trap vector**/
 void ERROR_HANDLER_NORETURN _AddressError(void)
 {
-    INTCON1bits.ADDRERR = 0;  //Clear the trap flag
+    INTCON1bits.ADDRERR = 0; // Clear the trap flag
     TRAPS_halt_on_error(TRAPS_ADDRESS_ERR);
 }
 /** Math Error Trap vector**/
 void ERROR_HANDLER_NORETURN _MathError(void)
 {
-    INTCON1bits.MATHERR = 0;  //Clear the trap flag
+    INTCON1bits.MATHERR = 0; // Clear the trap flag
     TRAPS_halt_on_error(TRAPS_MATH_ERR);
 }
 /** DMAC Error Trap vector**/
 void ERROR_HANDLER_NORETURN _DMACError(void)
 {
-    INTCON1bits.DMACERR = 0;  //Clear the trap flag
+    INTCON1bits.DMACERR = 0; // Clear the trap flag
     TRAPS_halt_on_error(TRAPS_DMAC_ERR);
 }
 /** Generic Hard Trap vector**/
 void ERROR_HANDLER_NORETURN _HardTrapError(void)
 {
-    INTCON4bits.SGHT = 0;  //Clear the trap flag
+    INTCON4bits.SGHT = 0; // Clear the trap flag
     TRAPS_halt_on_error(TRAPS_HARD_ERR);
 }
 /** Generic Soft Trap vector**/
 void ERROR_HANDLER_NORETURN _SoftTrapError(void)
 {
-    if(INTCON3bits.DAE)
+    if (INTCON3bits.DAE)
     {
-      INTCON3bits.DAE = 0;  //Clear the trap flag
-      TRAPS_halt_on_error(TRAPS_DAE_ERR);
+        INTCON3bits.DAE = 0; // Clear the trap flag
+        TRAPS_halt_on_error(TRAPS_DAE_ERR);
     }
-    if(INTCON3bits.DOOVR)
+    if (INTCON3bits.DOOVR)
     {
-      INTCON3bits.DOOVR = 0;  //Clear the trap flag
-      TRAPS_halt_on_error(TRAPS_DOOVR_ERR);
+        INTCON3bits.DOOVR = 0; // Clear the trap flag
+        TRAPS_halt_on_error(TRAPS_DOOVR_ERR);
     }
-    while(1);
+    while (1)
+        ;
 }
-
-

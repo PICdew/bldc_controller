@@ -1,5 +1,5 @@
 /**
-  System Traps Generated Driver File 
+  System Traps Generated Driver File
 
   @Company:
     Microchip Technology Inc.
@@ -13,7 +13,7 @@
 
   @Description:
     This source file provides implementations for PIC24 / dsPIC33 / PIC32MM MCUs traps.
-    Generation Information : 
+    Generation Information :
         Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - pic24-dspic-pic32mm : v1.35
         Device            :  dsPIC33EP256MC506
     The generated drivers are tested against the following:
@@ -50,17 +50,16 @@
 /**
  * Error codes
  */
-typedef enum 
-{
+typedef enum {
     /* ----- Traps ----- */
-    TRAPS_OSC_FAIL = 0, /** Oscillator Fail Trap vector */
-    TRAPS_STACK_ERR = 1, /** Stack Error Trap Vector */
+    TRAPS_OSC_FAIL = 0,    /** Oscillator Fail Trap vector */
+    TRAPS_STACK_ERR = 1,   /** Stack Error Trap Vector */
     TRAPS_ADDRESS_ERR = 2, /** Address error Trap vector */
-    TRAPS_MATH_ERR = 3, /** Math Error Trap vector */
-    TRAPS_DMAC_ERR = 4, /** DMAC Error Trap vector */
-    TRAPS_HARD_ERR = 7, /** Generic Hard Trap vector */
-    TRAPS_DAE_ERR = 9, /** Generic Soft Trap vector */
-    TRAPS_DOOVR_ERR = 10, /** Generic Soft Trap vector */
+    TRAPS_MATH_ERR = 3,    /** Math Error Trap vector */
+    TRAPS_DMAC_ERR = 4,    /** DMAC Error Trap vector */
+    TRAPS_HARD_ERR = 7,    /** Generic Hard Trap vector */
+    TRAPS_DAE_ERR = 9,     /** Generic Soft Trap vector */
+    TRAPS_DOOVR_ERR = 10,  /** Generic Soft Trap vector */
 } TRAPS_ERROR_CODE;
 /**
   @Summary

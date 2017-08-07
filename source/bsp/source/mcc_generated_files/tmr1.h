@@ -1,5 +1,5 @@
 /**
-  TMR1 Generated Driver API Header File 
+  TMR1 Generated Driver API Header File
 
   @Company
     Microchip Technology Inc.
@@ -11,8 +11,8 @@
     This is the generated header file for the TMR1 driver using PIC24 / dsPIC33 / PIC32MM MCUs
 
   @Description
-    This header file provides APIs for driver for TMR1. 
-    Generation Information : 
+    This header file provides APIs for driver for TMR1.
+    Generation Information :
         Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - pic24-dspic-pic32mm : v1.35
         Device            :  dsPIC33EP256MC506
     The generated drivers are tested against the following:
@@ -53,13 +53,13 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#ifdef __cplusplus  // Provide C++ Compatibility
+#ifdef __cplusplus // Provide C++ Compatibility
 
-    extern "C" {
+extern "C" {
 
 #endif
 
-#define TMR1_INTERRUPT_TICKER_FACTOR    1
+#define TMR1_INTERRUPT_TICKER_FACTOR 1
 
 /**
   Section: Interface Routines
@@ -79,8 +79,8 @@
 
   @Returns
     None
- 
-  @Example 
+
+  @Example
     <code>
     bool statusTimer1;
     uint16_t period;
@@ -107,8 +107,7 @@
     }
     </code>
 */
-void TMR1_Initialize (void);
-
+void TMR1_Initialize(void);
 
 /**
   @Summary
@@ -122,12 +121,12 @@ void TMR1_Initialize (void);
 
   @Returns
     None
- 
-  @Example 
+
+  @Example
     Refer to the example of TMR1_Initialize();
 */
 
-void TMR1_Period16BitSet( uint16_t value );
+void TMR1_Period16BitSet(uint16_t value);
 
 /**
 
@@ -142,12 +141,12 @@ void TMR1_Period16BitSet( uint16_t value );
 
   @Returns
     Timer 16-bit period value
- 
-  @Example 
+
+  @Example
     Refer to the example of TMR1_Initialize();
 */
 
-uint16_t TMR1_Period16BitGet( void );
+uint16_t TMR1_Period16BitGet(void);
 
 /**
   @Summary
@@ -162,7 +161,7 @@ uint16_t TMR1_Period16BitGet( void );
   @Returns
     None
 
-  @Example 
+  @Example
     <code>
     uint16_t value=0xF0F0;
 
@@ -179,7 +178,7 @@ uint16_t TMR1_Period16BitGet( void );
     </code>
 */
 
-void TMR1_Counter16BitSet ( uint16_t value );
+void TMR1_Counter16BitSet(uint16_t value);
 
 /**
   @Summary
@@ -193,12 +192,12 @@ void TMR1_Counter16BitSet ( uint16_t value );
 
   @Returns
     16-bit current counter value
- 
-  @Example 
+
+  @Example
     Refer to the example of TMR1_Counter16BitSet();
 */
 
-uint16_t TMR1_Counter16BitGet( void );
+uint16_t TMR1_Counter16BitGet(void);
 
 /**
   @Summary
@@ -212,8 +211,8 @@ uint16_t TMR1_Counter16BitGet( void );
 
   @Returns
     None
- 
-  @Example 
+
+  @Example
     Refer to the example of TMR1_Initialize();
 */
 void TMR1_CallBack(void);
@@ -230,12 +229,12 @@ void TMR1_CallBack(void);
 
   @Returns
     None
- 
-  @Example 
+
+  @Example
     Refer to the example of TMR1_Initialize();
 */
 
-void TMR1_Start( void );
+void TMR1_Start(void);
 
 /**
   @Summary
@@ -249,19 +248,19 @@ void TMR1_Start( void );
 
   @Returns
     None
- 
-  @Example 
+
+  @Example
     Refer to the example of TMR1_Initialize();
 */
 
-void TMR1_Stop( void );
+void TMR1_Stop(void);
 
 /**
   @Summary
     Returns the elapsed status of the timer and clears if flag is set.
 
   @Description
-    This routine returns the elapsed status of the timer and clears 
+    This routine returns the elapsed status of the timer and clears
     flag if its set.
 
   @Param
@@ -270,8 +269,8 @@ void TMR1_Stop( void );
   @Returns
     True - Timer has elapsed.
     False - Timer has not elapsed.
- 
-  @Example 
+
+  @Example
     Refer to the example of TMR1_Initialize();
 */
 
@@ -289,8 +288,8 @@ bool TMR1_GetElapsedThenClear(void);
 
   @Returns
     Software counter value.
- 
-  @Example 
+
+  @Example
     Refer to the example of TMR1_Initialize();
 */
 
@@ -308,21 +307,20 @@ int TMR1_SoftwareCounterGet(void);
 
   @Returns
     None
- 
-  @Example 
+
+  @Example
     Refer to the example of TMR1_Initialize();
 */
 
 void TMR1_SoftwareCounterClear(void);
 
-#ifdef __cplusplus  // Provide C++ Compatibility
-
-    }
+#ifdef __cplusplus // Provide C++ Compatibility
+}
 
 #endif
 
 #endif //_TMR1_H
-    
+
 /**
  End of File
 */

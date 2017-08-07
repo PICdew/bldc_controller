@@ -1,6 +1,6 @@
 
 /**
-  TMR1 Generated Driver API Source File 
+  TMR1 Generated Driver API Source File
 
   @Company
     Microchip Technology Inc.
@@ -12,8 +12,8 @@
     This is the generated source file for the TMR1 driver using PIC24 / dsPIC33 / PIC32MM MCUs
 
   @Description
-    This source file provides APIs for driver for TMR1. 
-    Generation Information : 
+    This source file provides APIs for driver for TMR1.
+    Generation Information :
         Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - pic24-dspic-pic32mm : v1.35
         Device            :  dsPIC33EP256MC506
     The generated drivers are tested against the following:
@@ -71,9 +71,9 @@
 typedef struct _TMR_OBJ_STRUCT
 {
     /* Timer Elapsed */
-    bool                                                    timerElapsed;
+    bool timerElapsed;
     /*Software Counter value*/
-    uint8_t                                                 count;
+    uint8_t count;
 
 } TMR_OBJ;
 
@@ -83,24 +83,20 @@ static TMR_OBJ tmr1_obj;
   Section: Driver Interface
 */
 
-
-void TMR1_Initialize (void)
+void TMR1_Initialize(void)
 {
-    //TMR1 0; 
+    // TMR1 0;
     TMR1 = 0x0;
-    //Period = 0.001 s; Frequency = 3685000 Hz; PR1 3685; 
+    // Period = 0.001 s; Frequency = 3685000 Hz; PR1 3685;
     PR1 = 0xE65;
-    //TCKPS 1:1; TON enabled; TSIDL disabled; TCS FOSC/2; TSYNC disabled; TGATE disabled; 
+    // TCKPS 1:1; TON enabled; TSIDL disabled; TCS FOSC/2; TSYNC disabled; TGATE disabled;
     T1CON = 0x8000;
 
-    
     IFS0bits.T1IF = false;
     IEC0bits.T1IE = true;
-	
+
     tmr1_obj.timerElapsed = false;
-
 }
-
 
 QK_ISR(no_auto_psv) _T1Interrupt(void)
 {
@@ -121,8 +117,7 @@ QK_ISR(no_auto_psv) _T1Interrupt(void)
     QK_ISR_EXIT();
 }
 
-
-void TMR1_Period16BitSet( uint16_t value )
+void TMR1_Period16BitSet(uint16_t value)
 {
     /* Update the counter values */
     PR1 = value;
@@ -130,12 +125,12 @@ void TMR1_Period16BitSet( uint16_t value )
     tmr1_obj.timerElapsed = false;
 }
 
-uint16_t TMR1_Period16BitGet( void )
+uint16_t TMR1_Period16BitGet(void)
 {
-    return( PR1 );
+    return (PR1);
 }
 
-void TMR1_Counter16BitSet ( uint16_t value )
+void TMR1_Counter16BitSet(uint16_t value)
 {
     /* Update the counter values */
     TMR1 = value;
@@ -143,18 +138,17 @@ void TMR1_Counter16BitSet ( uint16_t value )
     tmr1_obj.timerElapsed = false;
 }
 
-uint16_t TMR1_Counter16BitGet( void )
+uint16_t TMR1_Counter16BitGet(void)
 {
-    return( TMR1 );
+    return (TMR1);
 }
 
-
-void __attribute__ ((weak)) TMR1_CallBack(void)
+void __attribute__((weak)) TMR1_CallBack(void)
 {
     // Add your custom callback code here
 }
 
-void TMR1_Start( void )
+void TMR1_Start(void)
 {
     /* Reset the status information */
     tmr1_obj.timerElapsed = false;
@@ -166,7 +160,7 @@ void TMR1_Start( void )
     T1CONbits.TON = 1;
 }
 
-void TMR1_Stop( void )
+void TMR1_Stop(void)
 {
     /* Stop the Timer */
     T1CONbits.TON = false;
@@ -178,10 +172,10 @@ void TMR1_Stop( void )
 bool TMR1_GetElapsedThenClear(void)
 {
     bool status;
-    
+
     status = tmr1_obj.timerElapsed;
 
-    if(status == true)
+    if (status == true)
     {
         tmr1_obj.timerElapsed = false;
     }
@@ -195,7 +189,7 @@ int TMR1_SoftwareCounterGet(void)
 
 void TMR1_SoftwareCounterClear(void)
 {
-    tmr1_obj.count = 0; 
+    tmr1_obj.count = 0;
 }
 
 /**

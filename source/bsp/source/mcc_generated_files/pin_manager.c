@@ -1,5 +1,5 @@
 /**
-  System Interrupts Generated Driver File 
+  System Interrupts Generated Driver File
 
   @Company:
     Microchip Technology Inc.
@@ -14,7 +14,7 @@
 
   @Description:
     This source file provides implementations for MPLAB(c) Code Configurator interrupts.
-    Generation Information : 
+    Generation Information :
         Product Revision  :  MPLAB(c) Code Configurator - 4.26
         Device            :  dsPIC33EP256MC506
     The generated drivers are tested against the following:
@@ -43,7 +43,6 @@
     (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
 
 */
-
 
 /**
     Section: Includes
@@ -114,7 +113,4 @@ void PIN_MANAGER_Initialize(void)
     ANSELB = 0x0103;
     ANSELC = 0x0807;
     ANSELE = 0xF000;
-
-
 }
-
