@@ -5,7 +5,7 @@ import os
 import os.path
 
 # All the file path include following keywords will be not be formated
-exceptionList = ['lib', 'qpn']
+exceptionList = ['lib', 'source/qpn', 'main.c', 'qpn_conf.h']
 
 path = os.getcwd() + '/../'
 for root, dirs, files in os.walk(path):
