@@ -34,11 +34,13 @@
 #ifndef qpn_conf_h
 #define qpn_conf_h
 
-/* maximum # active objects--must match EXACTLY the QF_active[] definition  */
-#define QF_MAX_ACTIVE 1U
-#define Q_PARAM_SIZE 4U
-#define QF_MAX_TICK_RATE 1U
-#define QF_TIMEEVT_CTR_SIZE 2U
+/* The size (in bytes) of the single scalar parameter representation in the QEvent struct. */
+#define Q_PARAM_SIZE        (4U)
+/* Specifies the number of clock tick rates */
+#define QF_MAX_TICK_RATE    (1U)
+/* The size (in bytes) of the time event-counter representation in the QActive struct */
+#define QF_TIMEEVT_CTR_SIZE (2U)
+/* Configuration switch to enable/disable periodic time events. */
 #define QF_TIMEEVT_PERIODIC
 
 #endif /* qpn_conf_h */
