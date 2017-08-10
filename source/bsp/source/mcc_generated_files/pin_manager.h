@@ -55,13 +55,13 @@
 */
 /**
   @Summary
-    Sets the GPIO pin, RA0, high using LATA0.
+    Sets the GPIO pin, RD5, high using LATD5.
 
   @Description
-    Sets the GPIO pin, RA0, high using LATA0.
+    Sets the GPIO pin, RD5, high using LATD5.
 
   @Preconditions
-    The RA0 must be set to an output.
+    The RD5 must be set to an output.
 
   @Returns
     None.
@@ -71,21 +71,21 @@
 
   @Example
     <code>
-    // Set RA0 high (1)
-    IO_RA0_SetHigh();
+    // Set RD5 high (1)
+    IO_RD5_SetHigh();
     </code>
 
 */
-#define IO_RA0_SetHigh() _LATA0 = 1
+#define IO_RD5_SetHigh() _LATD5 = 1
 /**
   @Summary
-    Sets the GPIO pin, RA0, low using LATA0.
+    Sets the GPIO pin, RD5, low using LATD5.
 
   @Description
-    Sets the GPIO pin, RA0, low using LATA0.
+    Sets the GPIO pin, RD5, low using LATD5.
 
   @Preconditions
-    The RA0 must be set to an output.
+    The RD5 must be set to an output.
 
   @Returns
     None.
@@ -95,21 +95,21 @@
 
   @Example
     <code>
-    // Set RA0 low (0)
-    IO_RA0_SetLow();
+    // Set RD5 low (0)
+    IO_RD5_SetLow();
     </code>
 
 */
-#define IO_RA0_SetLow() _LATA0 = 0
+#define IO_RD5_SetLow() _LATD5 = 0
 /**
   @Summary
-    Toggles the GPIO pin, RA0, using LATA0.
+    Toggles the GPIO pin, RD5, using LATD5.
 
   @Description
-    Toggles the GPIO pin, RA0, using LATA0.
+    Toggles the GPIO pin, RD5, using LATD5.
 
   @Preconditions
-    The RA0 must be set to an output.
+    The RD5 must be set to an output.
 
   @Returns
     None.
@@ -119,18 +119,18 @@
 
   @Example
     <code>
-    // Toggle RA0
-    IO_RA0_Toggle();
+    // Toggle RD5
+    IO_RD5_Toggle();
     </code>
 
 */
-#define IO_RA0_Toggle() _LATA0 ^= 1
+#define IO_RD5_Toggle() _LATD5 ^= 1
 /**
   @Summary
-    Reads the value of the GPIO pin, RA0.
+    Reads the value of the GPIO pin, RD5.
 
   @Description
-    Reads the value of the GPIO pin, RA0.
+    Reads the value of the GPIO pin, RD5.
 
   @Preconditions
     None.
@@ -145,18 +145,18 @@
     <code>
     uint16_t portValue;
 
-    // Read RA0
-    postValue = IO_RA0_GetValue();
+    // Read RD5
+    postValue = IO_RD5_GetValue();
     </code>
 
 */
-#define IO_RA0_GetValue() _RA0
+#define IO_RD5_GetValue() _RD5
 /**
   @Summary
-    Configures the GPIO pin, RA0, as an input.
+    Configures the GPIO pin, RD5, as an input.
 
   @Description
-    Configures the GPIO pin, RA0, as an input.
+    Configures the GPIO pin, RD5, as an input.
 
   @Preconditions
     None.
@@ -169,18 +169,18 @@
 
   @Example
     <code>
-    // Sets the RA0 as an input
-    IO_RA0_SetDigitalInput();
+    // Sets the RD5 as an input
+    IO_RD5_SetDigitalInput();
     </code>
 
 */
-#define IO_RA0_SetDigitalInput() _TRISA0 = 1
+#define IO_RD5_SetDigitalInput() _TRISD5 = 1
 /**
   @Summary
-    Configures the GPIO pin, RA0, as an output.
+    Configures the GPIO pin, RD5, as an output.
 
   @Description
-    Configures the GPIO pin, RA0, as an output.
+    Configures the GPIO pin, RD5, as an output.
 
   @Preconditions
     None.
@@ -193,12 +193,158 @@
 
   @Example
     <code>
-    // Sets the RA0 as an output
-    IO_RA0_SetDigitalOutput();
+    // Sets the RD5 as an output
+    IO_RD5_SetDigitalOutput();
     </code>
 
 */
-#define IO_RA0_SetDigitalOutput() _TRISA0 = 0
+#define IO_RD5_SetDigitalOutput() _TRISD5 = 0
+/**
+  @Summary
+    Sets the GPIO pin, RD6, high using LATD6.
+
+  @Description
+    Sets the GPIO pin, RD6, high using LATD6.
+
+  @Preconditions
+    The RD6 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RD6 high (1)
+    IO_RD6_SetHigh();
+    </code>
+
+*/
+#define IO_RD6_SetHigh() _LATD6 = 1
+/**
+  @Summary
+    Sets the GPIO pin, RD6, low using LATD6.
+
+  @Description
+    Sets the GPIO pin, RD6, low using LATD6.
+
+  @Preconditions
+    The RD6 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RD6 low (0)
+    IO_RD6_SetLow();
+    </code>
+
+*/
+#define IO_RD6_SetLow() _LATD6 = 0
+/**
+  @Summary
+    Toggles the GPIO pin, RD6, using LATD6.
+
+  @Description
+    Toggles the GPIO pin, RD6, using LATD6.
+
+  @Preconditions
+    The RD6 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Toggle RD6
+    IO_RD6_Toggle();
+    </code>
+
+*/
+#define IO_RD6_Toggle() _LATD6 ^= 1
+/**
+  @Summary
+    Reads the value of the GPIO pin, RD6.
+
+  @Description
+    Reads the value of the GPIO pin, RD6.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    uint16_t portValue;
+
+    // Read RD6
+    postValue = IO_RD6_GetValue();
+    </code>
+
+*/
+#define IO_RD6_GetValue() _RD6
+/**
+  @Summary
+    Configures the GPIO pin, RD6, as an input.
+
+  @Description
+    Configures the GPIO pin, RD6, as an input.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RD6 as an input
+    IO_RD6_SetDigitalInput();
+    </code>
+
+*/
+#define IO_RD6_SetDigitalInput() _TRISD6 = 1
+/**
+  @Summary
+    Configures the GPIO pin, RD6, as an output.
+
+  @Description
+    Configures the GPIO pin, RD6, as an output.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RD6 as an output
+    IO_RD6_SetDigitalOutput();
+    </code>
+
+*/
+#define IO_RD6_SetDigitalOutput() _TRISD6 = 0
 
 /**
     Section: Function Prototypes

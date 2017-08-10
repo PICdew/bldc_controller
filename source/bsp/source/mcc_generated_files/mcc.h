@@ -52,7 +52,7 @@
 #include "interrupt_manager.h"
 #include "traps.h"
 
-#define _XTAL_FREQ 7370000UL
+#define _XTAL_FREQ 8000000UL
 
 /**
   Section: Type defines

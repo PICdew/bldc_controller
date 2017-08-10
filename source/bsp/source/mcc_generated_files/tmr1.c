@@ -87,10 +87,10 @@ void TMR1_Initialize(void)
 {
     // TMR1 0;
     TMR1 = 0x0;
-    // Period = 0.001 s; Frequency = 3685000 Hz; PR1 3685;
-    PR1 = 0xE65;
-    // TCKPS 1:1; TON enabled; TSIDL disabled; TCS FOSC/2; TSYNC disabled; TGATE disabled;
-    T1CON = 0x8000;
+    // Period = 0.001 s; Frequency = 4000000 Hz; PR1 4000;
+    PR1 = 0xFA0;
+    // TCKPS 1:1; TON disabled; TSIDL disabled; TCS FOSC/2; TSYNC disabled; TGATE disabled;
+    T1CON = 0x0;
 
     IFS0bits.T1IF = false;
     IEC0bits.T1IE = true;

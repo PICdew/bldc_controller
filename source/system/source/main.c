@@ -46,6 +46,7 @@ void Q_onAssert(char const Q_ROM *const Q_ROM_VAR module, int loc)
 void QF_onStartup(void)
 {
     INTERRUPT_GlobalEnable();
+    TMR1_Start();
 }
 
 void QK_onIdle(void)

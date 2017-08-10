@@ -19,6 +19,7 @@
 
 #include "../source/mcc_generated_files/pin_manager.h"
 #include "../source/mcc_generated_files/interrupt_manager.h"
+#include "../source/mcc_generated_files/tmr1.h"
 
 /*******************************************************************************
  * Definitions
@@ -37,12 +38,12 @@ void BSP_Init(void);
 
 static inline void BSP_ledOff(void)
 {
-    IO_RA0_SetHigh();
+    IO_RD5_SetHigh();
 }
 
 static inline void BSP_ledOn(void)
 {
-    IO_RA0_SetLow();
+    IO_RD5_SetLow();
 }
 
 #if defined(__cplusplus)

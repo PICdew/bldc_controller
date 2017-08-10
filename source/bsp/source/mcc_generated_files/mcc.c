@@ -45,7 +45,7 @@
 // Configuration bits: selected in the GUI
 
 // FICD
-#pragma config ICS = PGD1   // ICD Communication Channel Select bits->Communicate on PGEC1 and PGED1
+#pragma config ICS = PGD2   // ICD Communication Channel Select bits->Communicate on PGEC2 and PGED2
 #pragma config JTAGEN = OFF // JTAG Enable bit->JTAG is disabled
 
 // FPOR
@@ -62,14 +62,14 @@
 #pragma config FWDTEN = OFF // Watchdog Timer Enable bit->Watchdog timer enabled/disabled by user software
 
 // FOSC
-#pragma config POSCMD = NONE // Primary Oscillator Mode Select bits->Primary Oscillator disabled
+#pragma config POSCMD = XT   // Primary Oscillator Mode Select bits->XT Crystal Oscillator Mode
 #pragma config OSCIOFNC = ON // OSC2 Pin Function bit->OSC2 is general purpose digital I/O pin
 #pragma config IOL1WAY = ON  // Peripheral pin select configuration->Allow only one reconfiguration
 #pragma config FCKSM = \
     CSDCMD // Clock Switching Mode bits->Both Clock switching and Fail-safe Clock Monitor are disabled
 
 // FOSCSEL
-#pragma config FNOSC = FRC  // Oscillator Source Selection->Internal Fast RC (FRC)
+#pragma config FNOSC = PRI  // Oscillator Source Selection->Primary Oscillator (XT, HS, EC)
 #pragma config PWMLOCK = ON // PWM Lock Enable bit->Certain PWM registers may only be written after key sequence
 #pragma config IESO = ON    // Two-speed Oscillator Start-up Enable bit->Start up device with FRC, then switch to
                             // user-selected oscillator source
@@ -105,13 +105,14 @@ void SYSTEM_Initialize(void)
     OSCILLATOR_Initialize();
     INTERRUPT_Initialize();
     TMR1_Initialize();
+    INTERRUPT_GlobalDisable();
     CORCON_ModeOperatingSet(CORCON_MODE_PORVALUES);
 }
 
 void OSCILLATOR_Initialize(void)
 {
-    // CF no clock failure; NOSC FRC; CLKLOCK unlocked; OSWEN Switch is Complete;
-    __builtin_write_OSCCONL((uint8_t)(0x0 & 0x00FF));
+    // CF no clock failure; NOSC PRI; CLKLOCK unlocked; OSWEN Switch is Complete;
+    __builtin_write_OSCCONL((uint8_t)(0x200 & 0x00FF));
     // FRCDIV FRC/2; PLLPRE 2; DOZE 1:8; PLLPOST 1:2; DOZEN disabled; ROI disabled;
     CLKDIV = 0x3100;
     // TUN Center frequency;
