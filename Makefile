@@ -30,7 +30,8 @@ VPATH = \
 	source/qpn/source \
 	source/utils/source \
 	source/system/source \
-	source/blinky/source
+	source/blinky/source \
+	source/motor_contr/source
 
 # list of all include directories needed by this project
 INCLUDES  = \
@@ -39,7 +40,8 @@ INCLUDES  = \
 	-Isource/qpn/ports/pic24_dspic/qk \
 	-Isource/utils/include \
 	-Isource/system/include \
-	-Isource/blinky/include
+	-Isource/blinky/include \
+	-Isource/motor_contr/include
 
 #-----------------------------------------------------------------------------
 # files
@@ -60,7 +62,8 @@ C_SRCS := \
 	tmr1.c \
 	traps.c \
 	main.c \
-	blinky.c
+	blinky.c \
+	motor_contr.c
 
 # C++ source files
 #CPP_SRCS :=
