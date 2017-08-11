@@ -14,34 +14,28 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __MOTOR_CONTR_H__
-#define __MOTOR_CONTR_H__
+#include "qpn.h"
+#include "motor_cntlr.h"
 
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
-enum _motor_contr_signals
+typedef struct _motor_cntlr
 {
-    TIMEOUT_SIG = Q_USER_SIG, /* the last published signal */
-};
-
-extern struct _motor_contr AO_MotorContr;
+    QActive super; /* inherit QActive */
+} motor_cntlr_t;
 
 /*******************************************************************************
- * API
+ * Variables
  ******************************************************************************/
+motor_cntlr_t AO_MotorCntlr;
 
-#if defined(__cplusplus)
-extern "C" {
-#endif /* __cplusplus */
-
-void MotorContr_Ctor(void);
-
-#if defined(__cplusplus)
+/*******************************************************************************
+ * Code
+ ******************************************************************************/
+void MotorCntlr_Ctor(void)
+{
 }
-#endif /* __cplusplus */
-
-#endif /* __MOTOR_CONTR_H__ */
 
 /*******************************************************************************
  * EOF

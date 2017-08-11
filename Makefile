@@ -31,7 +31,7 @@ VPATH = \
 	source/utils/source \
 	source/system/source \
 	source/blinky/source \
-	source/motor_contr/source
+	source/motor_cntlr/source
 
 # list of all include directories needed by this project
 INCLUDES  = \
@@ -41,7 +41,7 @@ INCLUDES  = \
 	-Isource/utils/include \
 	-Isource/system/include \
 	-Isource/blinky/include \
-	-Isource/motor_contr/include
+	-Isource/motor_cntlr/include
 
 #-----------------------------------------------------------------------------
 # files
@@ -63,7 +63,7 @@ C_SRCS := \
 	traps.c \
 	main.c \
 	blinky.c \
-	motor_contr.c
+	motor_cntlr.c
 
 # C++ source files
 #CPP_SRCS :=
