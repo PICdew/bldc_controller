@@ -70,7 +70,7 @@ LIBS     :=
 LIB_DIRS :=
 
 # Linker script files
-LD_SCRIPT := p33EP256MC506.gld
+LD_SCRIPT := scripts/p33EP256MC506.gld
 
 # defines
 DEFINES   :=
