@@ -36,23 +36,6 @@ QActiveCB const Q_ROM QF_active[] = {
 /*******************************************************************************
  * Code
  ******************************************************************************/
-void Q_onAssert(char const Q_ROM *const Q_ROM_VAR module, int loc)
-{
-    while (1U)
-    {
-    }
-}
-
-void QF_onStartup(void)
-{
-    INTERRUPT_GlobalEnable();
-    TMR1_Start();
-}
-
-void QK_onIdle(void)
-{
-}
-
 int main(void)
 {
     /* Instantiate all Blinky AO */
