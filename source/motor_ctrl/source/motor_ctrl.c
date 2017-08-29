@@ -15,25 +15,25 @@
  */
 
 #include "qpn.h"
-#include "motor_cntlr.h"
+#include "motor_ctrl.h"
 
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
-typedef struct _motor_cntlr
+typedef struct _motor_ctrl
 {
     QActive super; /* inherit QActive */
-} motor_cntlr_t;
+} motor_ctrl_t;
 
 /*******************************************************************************
  * Variables
  ******************************************************************************/
-motor_cntlr_t AO_MotorCntlr;
+motor_ctrl_t AO_MotorCtrl;
 
 /*******************************************************************************
  * Code
  ******************************************************************************/
-void MotorCntlr_Ctor(void)
+void MotorCtrl_Ctor(void)
 {
 }
 

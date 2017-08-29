@@ -14,18 +14,18 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __MOTOR_CNTLR_H__
-#define __MOTOR_CNTLR_H__
+#ifndef __MOTOR_CTRL_H__
+#define __MOTOR_CTRL_H__
 
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
-enum _motor_cntlr_signals
+enum _motor_ctrl_signals
 {
     TIMEOUT_SIG = Q_USER_SIG, /* the last published signal */
 };
 
-extern struct _motor_cntlr AO_MotorContr;
+extern struct _motor_ctrl AO_MotorCtrl;
 
 /*******************************************************************************
  * API
@@ -35,13 +35,13 @@ extern struct _motor_cntlr AO_MotorContr;
 extern "C" {
 #endif /* __cplusplus */
 
-void MotorCntlr_Ctor(void);
+void MotorCtrl_Ctor(void);
 
 #if defined(__cplusplus)
 }
 #endif /* __cplusplus */
 
-#endif /* __MOTOR_CNTLR_H__ */
+#endif /* __MOTOR_CTRL_H__ */
 
 /*******************************************************************************
  * EOF
