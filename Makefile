@@ -27,7 +27,8 @@ PROJECT     := bldc-controller
 VPATH = \
 	source/bsp/source \
 	source/bsp/source/mcc_generated_files \
-	source/qpn/source \
+	source/qpc/src/qf \
+	source/qpc/src/qk \
 	source/utils/source \
 	source/system/source \
 	source/blinky/source \
@@ -36,8 +37,9 @@ VPATH = \
 # list of all include directories needed by this project
 INCLUDES  = \
 	-Isource/bsp/include \
-	-Isource/qpn/include \
-	-Isource/qpn/ports/pic24_dspic/qk \
+	-Isource/qpc/include \
+	-Isource/qpc/src \
+	-Isource/qpc/ports/pic24_dspic/qk \
 	-Isource/utils/include \
 	-Isource/system/include \
 	-Isource/blinky/include \
@@ -52,9 +54,20 @@ ASM_SRCS :=
 
 # C source files
 C_SRCS := \
-	qepn.c \
-	qfn.c \
-	qkn.c \
+	qep_hsm.c \
+	qep_msm.c \
+	qf_act.c \
+	qf_actq.c \
+	qf_defer.c \
+	qf_dyn.c \
+	qf_mem.c \
+	qf_ps.c \
+	qf_qact.c \
+	qf_qeq.c \
+	qf_qmact.c \
+	qf_time.c \
+	qk.c \
+	qk_mutex.c \
 	bsp.c \
 	interrupt_manager.c \
 	mcc.c \
@@ -62,8 +75,8 @@ C_SRCS := \
 	tmr1.c \
 	traps.c \
 	main.c \
-	blinky.c \
-	motor_ctrl.c
+	blinky.c
+	# motor_ctrl.c
 
 # C++ source files
 #CPP_SRCS :=

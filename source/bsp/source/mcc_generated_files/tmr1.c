@@ -48,7 +48,7 @@
 */
 
 #include <xc.h>
-#include "qpn.h"
+#include "qpc.h"
 #include "tmr1.h"
 
 /**

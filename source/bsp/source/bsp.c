@@ -14,7 +14,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "qpn.h"
+#include "qpc.h"
 #include "bsp.h"
 #include "mcc_generated_files/mcc.h"
 
@@ -23,7 +23,7 @@
  ******************************************************************************/
 void TMR1_CallBack(void)
 {
-    QF_tickXISR(0U);
+    QF_TICK_X(0U, (void *)0); /* process time events for rate 0 */
 }
 
 void BSP_Init(void)
@@ -42,6 +42,10 @@ void QF_onStartup(void)
 {
     INTERRUPT_GlobalEnable();
     TMR1_Start();
+}
+
+void QF_onCleanup(void)
+{
 }
 
 void QK_onIdle(void)

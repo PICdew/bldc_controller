@@ -25,7 +25,7 @@ enum _blinky_signals
     TIMEOUT_SIG = Q_USER_SIG, /* the last published signal */
 };
 
-extern struct _blinky AO_Blinky;
+extern QActive *const AO_Blinky;
 
 /*******************************************************************************
  * API
