@@ -20,6 +20,7 @@
 #include <xc.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include "bsp.h"
 
 /*******************************************************************************
  * Definitions

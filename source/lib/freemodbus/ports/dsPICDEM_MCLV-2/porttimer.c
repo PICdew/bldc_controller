@@ -22,23 +22,31 @@
 /*******************************************************************************
  * Code
  ******************************************************************************/
+void TMR2_CallBack(void)
+{
+    (void)pxMBPortCBTimerExpired();
+}
+
 BOOL xMBPortTimersInit(USHORT usTimeOut50us)
 {
-    return FALSE;
+    /* Initialize Timer module */
+    TMR2_Initialize();
+
+    /* Setup period */
+    TMR2_Period16BitSet(usTimeOut50us * 25U);
+
+    return ((usTimeOut50us * 25U) == TMR2_Period16BitGet());
 }
 
 inline void vMBPortTimersEnable(void)
 {
+    TMR2_Start();
 }
 
 inline void vMBPortTimersDisable(void)
 {
+    TMR2_Stop();
 }
-
-// void TMR2_CallBack(void)
-// {
-//     (void)pxMBPortCBTimerExpired();
-// }
 
 /*******************************************************************************
  * EOF
