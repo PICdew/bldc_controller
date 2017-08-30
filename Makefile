@@ -54,6 +54,13 @@ ASM_SRCS :=
 
 # C source files
 C_SRCS := \
+	main.c \
+	blinky.c
+
+# C++ source files
+#CPP_SRCS :=
+
+QP_SRCS := \
 	qep_hsm.c \
 	qep_msm.c \
 	qf_act.c \
@@ -67,19 +74,15 @@ C_SRCS := \
 	qf_qmact.c \
 	qf_time.c \
 	qk.c \
-	qk_mutex.c \
+	qk_mutex.c
+
+BSP_SRCS := \
 	bsp.c \
 	interrupt_manager.c \
 	mcc.c \
 	pin_manager.c \
 	tmr1.c \
-	traps.c \
-	main.c \
-	blinky.c
-	# motor_ctrl.c
-
-# C++ source files
-#CPP_SRCS :=
+	traps.c
 
 # Library files and directories
 LIBS     :=
@@ -127,7 +130,7 @@ RM    := rm
 #
 
 # combine all the soruces...
-# C_SRCS += $(QP_SRCS) $(QP_PORT)
+C_SRCS += $(QP_SRCS) $(BSP_SRCS)
 
 # ifeq (debug, $(CONF)) # Debug configuration ...................................
 BUILD_DIR := build/debug
