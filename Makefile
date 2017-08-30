@@ -29,6 +29,10 @@ VPATH = \
 	source/bsp/source/mcc_generated_files \
 	source/qpc/src/qf \
 	source/qpc/src/qk \
+	source/lib/freemodbus/modbus \
+	source/lib/freemodbus/modbus/rtu \
+	source/lib/freemodbus/modbus/functions \
+	source/lib/freemodbus/ports/dsPICDEM_MCLV-2 \
 	source/utils/source \
 	source/system/source \
 	source/blinky/source \
@@ -40,6 +44,9 @@ INCLUDES  = \
 	-Isource/qpc/include \
 	-Isource/qpc/src \
 	-Isource/qpc/ports/pic24_dspic/qk \
+	-Isource/lib/freemodbus/modbus/include \
+	-Isource/lib/freemodbus/modbus/rtu \
+	-Isource/lib/freemodbus/ports/dsPICDEM_MCLV-2 \
 	-Isource/utils/include \
 	-Isource/system/include \
 	-Isource/blinky/include \
@@ -75,6 +82,21 @@ QP_SRCS := \
 	qf_time.c \
 	qk.c \
 	qk_mutex.c
+
+FREEMODEBUS_SRCS := \
+	mb.c \
+	mbcrc.c \
+	mbrtu.c \
+	mbfunccoils.c \
+	mbfuncdiag.c \
+	mbfuncdisc.c \
+	mbfuncholding.c \
+	mbfuncinput.c \
+	mbfuncother.c \
+	mbutils.c \
+	portevent.c \
+	portserial.c \
+	porttimer.c
 
 BSP_SRCS := \
 	bsp.c \

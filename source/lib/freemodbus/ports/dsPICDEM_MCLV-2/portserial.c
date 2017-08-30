@@ -31,6 +31,10 @@ BOOL xMBPortSerialInit(UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBPari
     return FALSE;
 }
 
+void vMBPortClose(void)
+{
+}
+
 BOOL xMBPortSerialPutByte(CHAR ucByte)
 {
     return TRUE;

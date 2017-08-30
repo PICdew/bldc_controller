@@ -18,6 +18,8 @@
 #define __PORT_H__
 
 #include <xc.h>
+#include <stdbool.h>
+#include <stdint.h>
 
 /*******************************************************************************
  * Definitions
