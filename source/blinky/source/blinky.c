@@ -38,14 +38,14 @@ static QState Blinky_On(blinky_t *const me, QEvt const *const e);
  * Variables
  ******************************************************************************/
 static blinky_t l_blinky;
-QActive * const AO_Blinky = &l_blinky.super;
+QActive *const AO_Blinky = &l_blinky.super;
 
 /*******************************************************************************
  * Code
  ******************************************************************************/
 void Blinky_Ctor(void)
 {
-    blinky_t * const me = &l_blinky;
+    blinky_t *const me = &l_blinky;
 
     QActive_ctor(&me->super, Q_STATE_CAST(&Blinky_Initial));
     QTimeEvt_ctorX(&me->timeEvt, &me->super, TIMEOUT_SIG, 0U);
