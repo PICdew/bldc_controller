@@ -3,14 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Projects/GitHub/bldc_controller/source/bsp/source/mcc_generated_files/mcc.c</file>
-            <file>file:/E:/Projects/GitHub/bldc_controller/source/qpn/source/qkn.c</file>
-            <file>file:/E:/Projects/GitHub/bldc_controller/source/bsp/source/mcc_generated_files/tmr1.c</file>
-            <file>file:/E:/Projects/GitHub/bldc_controller/source/bsp/source/bsp.c</file>
-            <file>file:/E:/Projects/GitHub/bldc_controller/source/system/source/main.c</file>
-            <file>file:/E:/Projects/GitHub/bldc_controller/source/blinky/source/blinky.c</file>
-            <file>file:/E:/Projects/GitHub/bldc_controller/source/qpn/source/qfn.c</file>
-            <file>file:/E:/Projects/GitHub/bldc_controller/source/bsp/source/mcc_generated_files/traps.c</file>
+            <file>file:/E:/Projects/PIC_Projects/bldc_controller/source/bsp/source/mcc_generated_files/uart1.c</file>
+            <file>file:/E:/Projects/PIC_Projects/bldc_controller/source/qpc/src/qk/qk.c</file>
         </group>
     </open-files>
 </project-private>
