@@ -105,7 +105,8 @@ BSP_SRCS := \
 	pin_manager.c \
 	tmr1.c \
 	tmr2.c \
-	traps.c
+	traps.c \
+	uart1.c
 
 # Library files and directories
 LIBS     :=

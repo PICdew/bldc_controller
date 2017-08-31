@@ -21,6 +21,7 @@
 #include "../source/mcc_generated_files/interrupt_manager.h"
 #include "../source/mcc_generated_files/tmr1.h"
 #include "../source/mcc_generated_files/tmr2.h"
+#include "../source/mcc_generated_files/uart1.h"
 
 /*******************************************************************************
  * Definitions
