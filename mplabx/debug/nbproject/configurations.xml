@@ -4,6 +4,17 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="MCC Generated Files"
+                     displayName="MCC Generated Files"
+                     projectFiles="true">
+        <itemPath>mcc_generated_files/uart1.h</itemPath>
+        <itemPath>mcc_generated_files/pin_manager.h</itemPath>
+        <itemPath>mcc_generated_files/interrupt_manager.h</itemPath>
+        <itemPath>mcc_generated_files/traps.h</itemPath>
+        <itemPath>mcc_generated_files/mcc.h</itemPath>
+        <itemPath>mcc_generated_files/tmr2.h</itemPath>
+        <itemPath>mcc_generated_files/tmr1.h</itemPath>
+      </logicalFolder>
       <itemPath>D:\ProgramFiles\Microchip\xc16\v1.31\support\dsPIC33E\h\p33EP256MC506.h</itemPath>
       <itemPath>D:\ProgramFiles\Microchip\xc16\v1.31\include\lega-c\stdint.h</itemPath>
     </logicalFolder>
@@ -15,6 +26,17 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="MCC Generated Files"
+                     displayName="MCC Generated Files"
+                     projectFiles="true">
+        <itemPath>mcc_generated_files/uart1.c</itemPath>
+        <itemPath>mcc_generated_files/pin_manager.c</itemPath>
+        <itemPath>mcc_generated_files/interrupt_manager.c</itemPath>
+        <itemPath>mcc_generated_files/traps.c</itemPath>
+        <itemPath>mcc_generated_files/mcc.c</itemPath>
+        <itemPath>mcc_generated_files/tmr2.c</itemPath>
+        <itemPath>mcc_generated_files/tmr1.c</itemPath>
+      </logicalFolder>
       <itemPath>E:\Projects\PIC_Projects\bldc_controller\source\qpc\src\qf\qf_ps.c</itemPath>
       <itemPath>E:\Projects\PIC_Projects\bldc_controller\source\qpc\src\qf\qep_msm.c</itemPath>
       <itemPath>E:\Projects\PIC_Projects\bldc_controller\source\qpc\src\qf\qf_qmact.c</itemPath>
@@ -39,10 +61,12 @@
       <itemPath>E:\Projects\PIC_Projects\bldc_controller\source\qpc\src\qf\qf_time.c</itemPath>
       <itemPath>E:\Projects\PIC_Projects\bldc_controller\source\qpc\src\qf\qf_defer.c</itemPath>
       <itemPath>E:\Projects\PIC_Projects\bldc_controller\source\system\source\main.c</itemPath>
+      <itemPath>main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
                    projectFiles="false">
+      <itemPath>MyConfig.mc3</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
