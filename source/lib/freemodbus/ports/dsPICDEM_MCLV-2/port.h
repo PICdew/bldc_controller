@@ -25,13 +25,13 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
-#define INLINE            inline
+#define INLINE inline
 #define PR_BEGIN_EXTERN_C extern "C" {
-#define PR_END_EXTERN_C   }
+#define PR_END_EXTERN_C }
 #define assert(x)
 
 #ifndef TRUE
-#define TRUE  (1)
+#define TRUE (1)
 #endif
 
 #ifndef FALSE
@@ -39,9 +39,9 @@
 #endif
 
 #define ENTER_CRITICAL_SECTION() __builtin_disi(0x3FFFU)
-#define EXIT_CRITICAL_SECTION()  __builtin_disi(0x0000U)
+#define EXIT_CRITICAL_SECTION() __builtin_disi(0x0000U)
 
-#define MB_PORT_HAS_CLOSE	                 (1)
+#define MB_PORT_HAS_CLOSE (1)
 #define MB_ASCII_TIMEOUT_WAIT_BEFORE_SEND_MS (2)
 
 typedef bool BOOL;

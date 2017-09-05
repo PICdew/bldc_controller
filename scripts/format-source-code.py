@@ -5,7 +5,7 @@ import os
 import os.path
 
 # All the file path include following keywords will be not be formated
-exceptionList = ['lib', 'source/qpc', 'main.c']
+exceptionList = ['lib/freemodbus/modbus', 'source/qpc', 'main.c']
 
 path = os.getcwd() + '/../'
 for root, dirs, files in os.walk(path):
