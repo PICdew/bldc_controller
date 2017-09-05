@@ -29,13 +29,9 @@ void TMR2_CallBack(void)
 
 BOOL xMBPortTimersInit(USHORT usTimeOut50us)
 {
-    /* Initialize Timer module */
-    TMR2_Initialize();
+    /* TMR2 peroid is set to 4.01ms(for 9600 bsp) in MCC driver. */
 
-    /* Setup period */
-    TMR2_Period16BitSet(usTimeOut50us * 24U);
-
-    return ((usTimeOut50us * 24U) == TMR2_Period16BitGet());
+    return TRUE;
 }
 
 inline void vMBPortTimersEnable(void)
