@@ -29,7 +29,8 @@ void TMR2_CallBack(void)
 
 BOOL xMBPortTimersInit(USHORT usTimeOut50us)
 {
-    /* TMR2 peroid is set to 4.01ms(for 9600 bsp) in MCC driver. */
+    /* TMR2 peroid is set to 4.01ms(for 9600 bps) in MCC driver. */
+    (void)usTimeOut50us;
 
     return TRUE;
 }
