@@ -36,6 +36,7 @@ VPATH = \
 	source/utils/source \
 	source/system/source \
 	source/blinky/source \
+	source/modbus/source \
 	source/motor_ctrl/source
 
 # list of all include directories needed by this project
@@ -50,6 +51,7 @@ INCLUDES  = \
 	-Isource/utils/include \
 	-Isource/system/include \
 	-Isource/blinky/include \
+	-Isource/modbus/include \
 	-Isource/motor_ctrl/include
 
 #-----------------------------------------------------------------------------
@@ -62,7 +64,8 @@ ASM_SRCS :=
 # C source files
 C_SRCS := \
 	main.c \
-	blinky.c
+	blinky.c \
+	modbus.c
 
 # C++ source files
 #CPP_SRCS :=
@@ -153,7 +156,7 @@ RM    := rm
 #
 
 # combine all the soruces...
-C_SRCS += $(QP_SRCS) $(BSP_SRCS)
+C_SRCS += $(QP_SRCS) $(BSP_SRCS) $(FREEMODEBUS_SRCS)
 
 # ifeq (debug, $(CONF)) # Debug configuration ...................................
 BUILD_DIR := build/debug

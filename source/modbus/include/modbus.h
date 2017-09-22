@@ -14,19 +14,29 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __BLDC_CONTROLLER__
-#define __BLDC_CONTROLLER__
+#ifndef __MODBUS_H__
+#define __MODBUS_H__
 
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
-enum _bldc_controller_signals
-{
-    TIMEOUT_SIG = Q_USER_SIG, /* the last published signal */
-    MODBUS_TICK_SIG,
-};
+extern QActive *const AO_Modbus;
 
-#endif /* __BLDC_CONTROLLER__ */
+/*******************************************************************************
+ * API
+ ******************************************************************************/
+
+#if defined(__cplusplus)
+extern "C" {
+#endif /* __cplusplus */
+
+void Modbus_Ctor(void);
+
+#if defined(__cplusplus)
+}
+#endif /* __cplusplus */
+
+#endif /* __MODBUS_H__ */
 
 /*******************************************************************************
  * EOF

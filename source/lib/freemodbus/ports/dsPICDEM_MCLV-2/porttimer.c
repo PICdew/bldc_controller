@@ -35,6 +35,11 @@ BOOL xMBPortTimersInit(USHORT usTimeOut50us)
     return TRUE;
 }
 
+void vMBPortTimersDelay(USHORT usTimeOutMS)
+{
+    (void)usTimeOutMS;
+}
+
 inline void vMBPortTimersEnable(void)
 {
     TMR2_Start();
