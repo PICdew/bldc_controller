@@ -15,6 +15,7 @@
  */
 
 #include "qpc.h"
+#include "bldc_controller.h"
 #include "bsp.h"
 #include "blinky.h"
 

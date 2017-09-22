@@ -17,6 +17,14 @@
 #ifndef __BLDC_CONTROLLER__
 #define __BLDC_CONTROLLER__
 
+/*******************************************************************************
+ * Definitions
+ ******************************************************************************/
+enum _bldc_controller_signals
+{
+    TIMEOUT_SIG = Q_USER_SIG, /* the last published signal */
+};
+
 #endif /* __BLDC_CONTROLLER__ */
 
 /*******************************************************************************
