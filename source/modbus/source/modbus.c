@@ -49,12 +49,7 @@ QActive *const AO_Modbus = &l_modbus.super;
 /*******************************************************************************
  * Code
  ******************************************************************************/
-eMBErrorCode eMBRegInputCB(uint8_t *pucRegBuffer, uint16_t usAddress, uint16_t usNRegs)
-{
-    return MB_ENOREG;
-}
-
-eMBErrorCode eMBRegHoldingCB(uint8_t *pucRegBuffer, uint16_t usAddress, uint16_t usNRegs, eMBRegisterMode eMode)
+eMBErrorCode eMBRegDiscreteCB(uint8_t *pucRegBuffer, uint16_t usAddress, uint16_t usNDiscrete)
 {
     return MB_ENOREG;
 }
@@ -64,7 +59,12 @@ eMBErrorCode eMBRegCoilsCB(uint8_t *pucRegBuffer, uint16_t usAddress, uint16_t u
     return MB_ENOREG;
 }
 
-eMBErrorCode eMBRegDiscreteCB(uint8_t *pucRegBuffer, uint16_t usAddress, uint16_t usNDiscrete)
+eMBErrorCode eMBRegInputCB(uint8_t *pucRegBuffer, uint16_t usAddress, uint16_t usNRegs)
+{
+    return MB_ENOREG;
+}
+
+eMBErrorCode eMBRegHoldingCB(uint8_t *pucRegBuffer, uint16_t usAddress, uint16_t usNRegs, eMBRegisterMode eMode)
 {
     return MB_ENOREG;
 }
