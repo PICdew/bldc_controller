@@ -20,6 +20,11 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
+#define MB_REG_INPUT_START (0x0U)
+#define MB_REG_INPUT_NREGS (64U)
+#define MB_REG_HOLDING_START (0x1000U)
+#define MB_REG_HOLDING_NREGS (32U)
+
 extern QActive *const AO_Modbus;
 
 /*******************************************************************************

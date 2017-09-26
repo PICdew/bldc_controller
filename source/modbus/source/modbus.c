@@ -45,6 +45,8 @@ static QState Modbus_Running(modbus_t *const me, QEvt const *const e);
  ******************************************************************************/
 static modbus_t l_modbus;
 QActive *const AO_Modbus = &l_modbus.super;
+static uint16_t mbRegInputBuf[MB_REG_INPUT_NREGS];
+// static uint16_t mbRegHoldingBuf[MB_REG_HOLDING_NREGS];
 
 /*******************************************************************************
  * Code
@@ -61,7 +63,23 @@ eMBErrorCode eMBRegCoilsCB(uint8_t *pucRegBuffer, uint16_t usAddress, uint16_t u
 
 eMBErrorCode eMBRegInputCB(uint8_t *pucRegBuffer, uint16_t usAddress, uint16_t usNRegs)
 {
-    return MB_ENOREG;
+    eMBErrorCode eStatus = MB_ENOERR;
+    uint16_t i;
+
+    if ((usAddress >= MB_REG_INPUT_START) && (usAddress + usNRegs <= MB_REG_INPUT_START + MB_REG_INPUT_NREGS))
+    {
+        for (i = ((usAddress - MB_REG_INPUT_START) >> 1U); i < usNRegs; i++)
+        {
+            *pucRegBuffer++ = (uint8_t)(mbRegInputBuf[i] >> 8U);
+            *pucRegBuffer++ = (uint8_t)(mbRegInputBuf[i] & 0xFFU);
+        }
+    }
+    else
+    {
+        eStatus = MB_ENOREG;
+    }
+
+    return eStatus;
 }
 
 eMBErrorCode eMBRegHoldingCB(uint8_t *pucRegBuffer, uint16_t usAddress, uint16_t usNRegs, eMBRegisterMode eMode)
