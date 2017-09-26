@@ -60,7 +60,7 @@ void PIN_MANAGER_Initialize(void)
      ***************************************************************************/
     LATA = 0x0000;
     LATB = 0x0000;
-    LATC = 0x0000;
+    LATC = 0x0020;
     LATD = 0x0000;
     LATE = 0x0000;
     LATF = 0x0003;
@@ -119,7 +119,7 @@ void PIN_MANAGER_Initialize(void)
      ***************************************************************************/
     __builtin_write_OSCCONL(OSCCON & 0xbf); // unlock PPS
 
-    RPINR18bits.U1RXR = 0x0060; // RF0->UART1:U1RX;
+    RPINR18bits.U1RXR = 0x0035; // RC5->UART1:U1RX;
     RPOR7bits.RP97R = 0x0001;   // RF1->UART1:U1TX;
 
     __builtin_write_OSCCONL(OSCCON | 0x40); // lock   PPS

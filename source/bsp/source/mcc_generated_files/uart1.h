@@ -53,7 +53,6 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include "qpc.h"
 #ifdef __cplusplus // Provide C++ Compatibility
 
 extern "C" {
