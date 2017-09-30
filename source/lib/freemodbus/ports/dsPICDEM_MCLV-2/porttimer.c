@@ -42,6 +42,8 @@ void vMBPortTimersDelay(USHORT usTimeOutMS)
 
 inline void vMBPortTimersEnable(void)
 {
+    TMR2_Stop();
+    TMR2_Counter16BitSet(0x0U);
     TMR2_Start();
 }
 
