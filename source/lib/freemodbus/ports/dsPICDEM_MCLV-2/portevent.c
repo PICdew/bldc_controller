@@ -20,8 +20,8 @@
 /*******************************************************************************
  * Variables
  ******************************************************************************/
-static eMBEventType eQueuedEvent;
-static BOOL xEventInQueue;
+static volatile eMBEventType eQueuedEvent;
+static volatile BOOL xEventInQueue;
 
 /*******************************************************************************
  * Code
