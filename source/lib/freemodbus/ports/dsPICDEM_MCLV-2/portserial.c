@@ -26,10 +26,10 @@
 void vMBPortSerialEnable(BOOL xRxEnable, BOOL xTxEnable)
 {
     /* Handle UART Rx Enable/Disable */
-    IEC0bits.U1RXIE = (TRUE == xRxEnable) ? 1U : 0U;
+    __write_to_IEC(IEC0bits.U1RXIE = (TRUE == xRxEnable) ? 1U : 0U);
 
     /* Handle UART Tx Enable/Disable */
-    IEC0bits.U1TXIE = (TRUE == xTxEnable) ? 1U : 0U;
+    __write_to_IEC(IEC0bits.U1TXIE = (TRUE == xTxEnable) ? 1U : 0U);
 }
 
 BOOL xMBPortSerialInit(UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity eParity)
