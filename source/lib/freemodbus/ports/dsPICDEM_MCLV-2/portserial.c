@@ -100,8 +100,8 @@ BOOL xMBPortSerialInit(UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBPari
 void vMBPortClose(void)
 {
     /* Disable UART Module */
-    U1MODEbits.UARTEN = 1U;
-    U1STAbits.UTXEN = 1U;
+    U1STAbits.UTXEN = 0U;
+    U1MODEbits.UARTEN = 0U;
 }
 
 BOOL xMBPortSerialPutByte(CHAR ucByte)
