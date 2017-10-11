@@ -66,9 +66,9 @@ BOOL xMBPortSerialInit(UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBPari
         switch (ulBaudRate)
         {
             case 9600U:
-                // BaudRate = 9600; Frequency = 30000000 Hz; BRG 195;
-                U1BRG = 0xC3U;
-                U1MODEbits.BRGH = 0U;
+                // BaudRate = 9600; Frequency = 30000000 Hz; BRG 780;
+                U1BRG = 0x30CU;
+                U1MODEbits.BRGH = 1U;
                 break;
 
             default:
