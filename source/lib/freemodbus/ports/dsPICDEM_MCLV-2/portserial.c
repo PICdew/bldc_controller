@@ -29,6 +29,7 @@ void vMBPortSerialEnable(BOOL xRxEnable, BOOL xTxEnable)
     __write_to_IEC(IEC0bits.U1RXIE = (TRUE == xRxEnable) ? 1U : 0U);
 
     /* Handle UART Tx Enable/Disable */
+    IFS0bits.U1TXIF = 1U;
     __write_to_IEC(IEC0bits.U1TXIE = (TRUE == xTxEnable) ? 1U : 0U);
 }
 
