@@ -50,8 +50,9 @@
 #include <stdbool.h>
 #include "interrupt_manager.h"
 #include "traps.h"
-#include "tmr2.h"
+#include "crc.h"
 #include "tmr1.h"
+#include "tmr2.h"
 
 #define _XTAL_FREQ 60000000UL
 

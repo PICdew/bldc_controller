@@ -103,6 +103,7 @@ FREEMODEBUS_SRCS := \
 
 BSP_SRCS := \
 	bsp.c \
+	crc.c \
 	interrupt_manager.c \
 	mcc.c \
 	pin_manager.c \

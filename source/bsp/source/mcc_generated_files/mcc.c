@@ -105,6 +105,7 @@ void SYSTEM_Initialize(void)
     PIN_MANAGER_Initialize();
     INTERRUPT_Initialize();
     OSCILLATOR_Initialize();
+    CRC_Initialize();
     TMR2_Initialize();
     TMR1_Initialize();
     INTERRUPT_GlobalDisable();
