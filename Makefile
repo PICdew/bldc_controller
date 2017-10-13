@@ -88,7 +88,6 @@ QP_SRCS := \
 
 FREEMODEBUS_SRCS := \
 	mb.c \
-	mbcrc.c \
 	mbrtu.c \
 	mbfunccoils.c \
 	mbfuncdiag.c \
@@ -97,6 +96,7 @@ FREEMODEBUS_SRCS := \
 	mbfuncinput.c \
 	mbfuncother.c \
 	mbutils.c \
+	portcrc.c \
 	portevent.c \
 	portserial.c \
 	porttimer.c

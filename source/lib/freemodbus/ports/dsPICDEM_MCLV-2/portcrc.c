@@ -14,46 +14,27 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __BSP_H__
-#define __BSP_H__
-
-#include "../source/mcc_generated_files/pin_manager.h"
-#include "../source/mcc_generated_files/interrupt_manager.h"
-#include "../source/mcc_generated_files/crc.h"
-#include "../source/mcc_generated_files/tmr1.h"
-#include "../source/mcc_generated_files/tmr2.h"
-#include "../source/mcc_generated_files/uart1.h"
+#include <stdbool.h>
+#include "bsp.h"
+#include "port.h"
 
 /*******************************************************************************
- * Definitions
+ * Code
  ******************************************************************************/
-#define BSP_TICKS_PER_SEC (1000U)
-
-/*******************************************************************************
- * API
- ******************************************************************************/
-
-#if defined(__cplusplus)
-extern "C" {
-#endif /* __cplusplus */
-
-void BSP_Init(void);
-
-static inline void BSP_ledOff(void)
+USHORT usMBCRC16(UCHAR *pucFrame, USHORT usLen)
 {
-    IO_RD5_SetHigh();
-}
+    /* Start the CRC */
+    CRC_CalculateBufferStart(pucFrame, usLen);
 
-static inline void BSP_ledOn(void)
-{
-    IO_RD5_SetLow();
-}
+    /* wait until done */
+    while (false == CRC_CalculationIsDone())
+    {
+        /* perform the CRC task */
+        CRC_Task();
+    }
 
-#if defined(__cplusplus)
+    return (USHORT)CRC_CalculationResultGet(false, 0);
 }
-#endif /* __cplusplus */
-
-#endif /* __BSP_H__ */
 
 /*******************************************************************************
  * EOF
