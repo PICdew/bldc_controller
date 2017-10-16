@@ -33,7 +33,7 @@ USHORT usMBCRC16(UCHAR *pucFrame, USHORT usLen)
         CRC_Task();
     }
 
-    return (USHORT)CRC_CalculationResultGet(false, 0);
+    return (USHORT)CRC_CalculationResultGet(true, 0);
 }
 
 /*******************************************************************************
