@@ -17,6 +17,8 @@
 #ifndef __MODBUS_H__
 #define __MODBUS_H__
 
+#include <stdbool.h>
+
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
@@ -24,6 +26,13 @@
 #define MB_REG_INPUT_NREGS (64U)
 #define MB_REG_HOLDING_START (0x1000U)
 #define MB_REG_HOLDING_NREGS (32U)
+
+typedef enum _modbus_data_type {
+    MODBUS_DataType_Discrete = 0U,
+    MODBUS_DataType_Coils = 1U,
+    MODBUS_DataType_Input = 2U,
+    MODBUS_DataType_Holding = 3U,
+} modbus_data_type_t;
 
 extern QActive *const AO_Modbus;
 
@@ -36,6 +45,8 @@ extern "C" {
 #endif /* __cplusplus */
 
 void Modbus_Ctor(void);
+bool Modbus_Read(uint16_t *buffer, uint16_t address, uint16_t num, modbus_data_type_t type);
+bool Modbus_Write(uint16_t *buffer, uint16_t address, uint16_t num, modbus_data_type_t type);
 
 #if defined(__cplusplus)
 }

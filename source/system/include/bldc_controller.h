@@ -23,6 +23,7 @@
 enum _bldc_controller_signals
 {
     TIMEOUT_SIG = Q_USER_SIG, /* the last published signal */
+    MODBUS_UPDATE_SIG,
     MODBUS_TICK_SIG,
 };
 

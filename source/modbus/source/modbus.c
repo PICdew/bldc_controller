@@ -32,6 +32,7 @@ typedef struct _modbus
 {                     /* the Blinky active object */
     QActive super;    /* inherit QActive */
     QTimeEvt timeEvt; /* private time event generator */
+    QMutex mutex;     /* mutex used to lock Modbus data */
 } modbus_t;
 
 /*******************************************************************************
@@ -93,6 +94,27 @@ void Modbus_Ctor(void)
 
     QActive_ctor(&me->super, Q_STATE_CAST(&Modbus_Initial));
     QTimeEvt_ctorX(&me->timeEvt, &me->super, MODBUS_TICK_SIG, 0U);
+    QMutex_init(&me->mutex, QF_MAX_ACTIVE);
+}
+
+bool Modbus_Read(uint16_t *buffer, uint16_t address, uint16_t num, modbus_data_type_t type)
+{
+    modbus_t *const me = &l_modbus;
+
+    QMutex_lock(&me->mutex);
+    QMutex_unlock(&me->mutex);
+
+    return true;
+}
+
+bool Modbus_Write(uint16_t *buffer, uint16_t address, uint16_t num, modbus_data_type_t type)
+{
+    modbus_t *const me = &l_modbus;
+
+    QMutex_lock(&me->mutex);
+    QMutex_unlock(&me->mutex);
+
+    return true;
 }
 
 QState Modbus_Initial(modbus_t *const me, QEvt const *const e)
