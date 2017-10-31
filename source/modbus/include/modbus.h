@@ -22,10 +22,14 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
+#define MB_REG_DISCRETE_START (0x0U)
+#define MB_REG_DISCRETE_NREGS (1U)
+#define MB_REG_COILS_START (0x0U)
+#define MB_REG_COILS_NREGS (1U)
 #define MB_REG_INPUT_START (0x0U)
-#define MB_REG_INPUT_NREGS (64U)
-#define MB_REG_HOLDING_START (0x1000U)
-#define MB_REG_HOLDING_NREGS (32U)
+#define MB_REG_INPUT_NREGS (1U)
+#define MB_REG_HOLDING_START (0x0U)
+#define MB_REG_HOLDING_NREGS (1U)
 
 typedef enum _modbus_data_type {
     MODBUS_DataType_Discrete = 0U,

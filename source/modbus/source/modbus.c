@@ -46,8 +46,10 @@ static QState Modbus_Running(modbus_t *const me, QEvt const *const e);
  ******************************************************************************/
 static modbus_t l_modbus;
 QActive *const AO_Modbus = &l_modbus.super;
-static uint16_t mbRegInputBuf[MB_REG_INPUT_NREGS];
-// static uint16_t mbRegHoldingBuf[MB_REG_HOLDING_NREGS];
+static uint8_t mbRegDiscreteBuf[MB_REG_DISCRETE_NREGS];
+static uint8_t mbRegCoilsBuf[MB_REG_COILS_NREGS];
+static uint8_t mbRegInputBuf[MB_REG_INPUT_NREGS];
+static uint8_t mbRegHoldingBuf[MB_REG_HOLDING_NREGS];
 
 /*******************************************************************************
  * Code
@@ -100,21 +102,65 @@ void Modbus_Ctor(void)
 bool Modbus_Read(uint16_t *buffer, uint16_t address, uint16_t num, modbus_data_type_t type)
 {
     modbus_t *const me = &l_modbus;
+    bool result;
 
     QMutex_lock(&me->mutex);
+    switch (type)
+    {
+        case MODBUS_DataType_Discrete:
+            result = true;
+            break;
+
+        case MODBUS_DataType_Coils:
+            result = true;
+            break;
+
+        case MODBUS_DataType_Input:
+            result = true;
+            break;
+
+        case MODBUS_DataType_Holding:
+            result = true;
+            break;
+
+        default:
+            result = false;
+    }
     QMutex_unlock(&me->mutex);
 
-    return true;
+    return result;
 }
 
 bool Modbus_Write(uint16_t *buffer, uint16_t address, uint16_t num, modbus_data_type_t type)
 {
     modbus_t *const me = &l_modbus;
+    bool result;
 
     QMutex_lock(&me->mutex);
+    switch (type)
+    {
+        case MODBUS_DataType_Discrete:
+            result = true;
+            break;
+
+        case MODBUS_DataType_Coils:
+            result = true;
+            break;
+
+        case MODBUS_DataType_Input:
+            result = true;
+            break;
+
+        case MODBUS_DataType_Holding:
+            result = true;
+            break;
+
+        default:
+            result = false;
+    }
     QMutex_unlock(&me->mutex);
 
-    return true;
+    return result;
 }
 
 QState Modbus_Initial(modbus_t *const me, QEvt const *const e)
