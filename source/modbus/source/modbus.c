@@ -53,8 +53,8 @@ static QState Modbus_Running(modbus_t *const me, QEvt const *const e);
  * Variables
  ******************************************************************************/
 static modbus_t l_modbus;
-static uint8_t mbRegDiscreteBuf[MODBUS_DISCRETE_BUF_SIZE] = {0U};
-static uint8_t mbRegCoilsBuf[MODBUS_COILS_BUF_SIZE] = {0U};
+// static uint8_t mbRegDiscreteBuf[MODBUS_DISCRETE_BUF_SIZE] = {0U};
+// static uint8_t mbRegCoilsBuf[MODBUS_COILS_BUF_SIZE] = {0U};
 static uint8_t mbRegInputBuf[MODBUS_INPUT_BUF_SIZE] = {0U};
 static uint8_t mbRegHoldingBuf[MODBUS_HOLDING_BUF_SIZE] = {0U};
 QActive *const AO_Modbus = &l_modbus.super;
@@ -150,33 +150,33 @@ bool Modbus_Read(uint8_t *buffer, uint16_t offset, uint16_t num, modbus_data_typ
     QMutex_lock(&me->mutex);
     switch (type)
     {
-        case MODBUS_DataType_Discrete:
-            if ((offset < MODBUS_DISCRETE_BUF_SIZE) && ((offset + num) <= MODBUS_DISCRETE_BUF_SIZE))
-            {
-                for (i = offset; i < (offset + num); i++)
-                {
-                    buffer[i - offset] = mbRegDiscreteBuf[i];
-                }
-            }
-            else
-            {
-                result = false;
-            }
-            break;
+        // case MODBUS_DataType_Discrete:
+        //     if ((offset < MODBUS_DISCRETE_BUF_SIZE) && ((offset + num) <= MODBUS_DISCRETE_BUF_SIZE))
+        //     {
+        //         for (i = offset; i < (offset + num); i++)
+        //         {
+        //             buffer[i - offset] = mbRegDiscreteBuf[i];
+        //         }
+        //     }
+        //     else
+        //     {
+        //         result = false;
+        //     }
+        //     break;
 
-        case MODBUS_DataType_Coils:
-            if ((offset < MODBUS_COILS_BUF_SIZE) && ((offset + num) <= MODBUS_COILS_BUF_SIZE))
-            {
-                for (i = offset; i < (offset + num); i++)
-                {
-                    buffer[i - offset] = mbRegCoilsBuf[i];
-                }
-            }
-            else
-            {
-                result = false;
-            }
-            break;
+        // case MODBUS_DataType_Coils:
+        //     if ((offset < MODBUS_COILS_BUF_SIZE) && ((offset + num) <= MODBUS_COILS_BUF_SIZE))
+        //     {
+        //         for (i = offset; i < (offset + num); i++)
+        //         {
+        //             buffer[i - offset] = mbRegCoilsBuf[i];
+        //         }
+        //     }
+        //     else
+        //     {
+        //         result = false;
+        //     }
+        //     break;
 
         case MODBUS_DataType_Input:
             if ((offset < MODBUS_INPUT_BUF_SIZE) && ((offset + num) <= MODBUS_INPUT_BUF_SIZE))
@@ -223,33 +223,33 @@ bool Modbus_Write(uint8_t *buffer, uint16_t offset, uint16_t num, modbus_data_ty
     QMutex_lock(&me->mutex);
     switch (type)
     {
-        case MODBUS_DataType_Discrete:
-            if ((offset < MODBUS_DISCRETE_BUF_SIZE) && ((offset + num) <= MODBUS_DISCRETE_BUF_SIZE))
-            {
-                for (i = offset; i < (offset + num); i++)
-                {
-                    mbRegDiscreteBuf[i] = buffer[i - offset];
-                }
-            }
-            else
-            {
-                result = false;
-            }
-            break;
+        // case MODBUS_DataType_Discrete:
+        //     if ((offset < MODBUS_DISCRETE_BUF_SIZE) && ((offset + num) <= MODBUS_DISCRETE_BUF_SIZE))
+        //     {
+        //         for (i = offset; i < (offset + num); i++)
+        //         {
+        //             mbRegDiscreteBuf[i] = buffer[i - offset];
+        //         }
+        //     }
+        //     else
+        //     {
+        //         result = false;
+        //     }
+        //     break;
 
-        case MODBUS_DataType_Coils:
-            if ((offset < MODBUS_COILS_BUF_SIZE) && ((offset + num) <= MODBUS_COILS_BUF_SIZE))
-            {
-                for (i = offset; i < (offset + num); i++)
-                {
-                    mbRegCoilsBuf[i] = buffer[i - offset];
-                }
-            }
-            else
-            {
-                result = false;
-            }
-            break;
+        // case MODBUS_DataType_Coils:
+        //     if ((offset < MODBUS_COILS_BUF_SIZE) && ((offset + num) <= MODBUS_COILS_BUF_SIZE))
+        //     {
+        //         for (i = offset; i < (offset + num); i++)
+        //         {
+        //             mbRegCoilsBuf[i] = buffer[i - offset];
+        //         }
+        //     }
+        //     else
+        //     {
+        //         result = false;
+        //     }
+        //     break;
 
         case MODBUS_DataType_Input:
             if ((offset < MODBUS_INPUT_BUF_SIZE) && ((offset + num) <= MODBUS_INPUT_BUF_SIZE))
