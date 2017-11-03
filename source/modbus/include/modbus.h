@@ -18,6 +18,7 @@
 #define __MODBUS_H__
 
 #include <stdbool.h>
+#include "qpc.h"
 
 /*******************************************************************************
  * Definitions
@@ -28,6 +29,13 @@ typedef enum _modbus_data_type {
     MODBUS_DataType_Input = 2U,
     MODBUS_DataType_Holding = 3U,
 } modbus_data_type_t;
+
+typedef struct _modbus_update_evt {
+    QEvt super;
+    modbus_data_type_t type;
+    uint16_t offset;
+    uint16_t num;
+} modbus_update_evt_t;
 
 extern QActive *const AO_Modbus;
 
