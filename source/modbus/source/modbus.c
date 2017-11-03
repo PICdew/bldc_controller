@@ -23,6 +23,14 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
+#define MODBUS_DISCRETE_START (0x1000U)
+#define MODBUS_DISCRETE_SIZE (1U)
+#define MODBUS_COILS_START (0x2000U)
+#define MODBUS_COILS_SIZE (1U)
+#define MODBUS_INPUT_START (0x3000U)
+#define MODBUS_INPUT_SIZE (1U)
+#define MODBUS_HOLDING_START (0x4000U)
+#define MODBUS_HOLDING_SIZE (1U)
 #define MODBUS_EXECUTE_PERIOD (10U)
 #define MODBUS_SLAVE_ADDRESS (0x01U)
 #define MODBUS_PORT (0U)
@@ -45,11 +53,11 @@ static QState Modbus_Running(modbus_t *const me, QEvt const *const e);
  * Variables
  ******************************************************************************/
 static modbus_t l_modbus;
+static uint8_t mbRegDiscreteBuf[MODBUS_DISCRETE_SIZE] = {0U};
+static uint8_t mbRegCoilsBuf[MODBUS_COILS_SIZE] = {0U};
+static uint8_t mbRegInputBuf[MODBUS_INPUT_SIZE] = {0U};
+static uint8_t mbRegHoldingBuf[MODBUS_HOLDING_SIZE] = {0U};
 QActive *const AO_Modbus = &l_modbus.super;
-static uint8_t mbRegDiscreteBuf[MB_REG_DISCRETE_NREGS];
-static uint8_t mbRegCoilsBuf[MB_REG_COILS_NREGS];
-static uint8_t mbRegInputBuf[MB_REG_INPUT_NREGS];
-static uint8_t mbRegHoldingBuf[MB_REG_HOLDING_NREGS];
 
 /*******************************************************************************
  * Code
@@ -66,23 +74,7 @@ eMBErrorCode eMBRegCoilsCB(uint8_t *pucRegBuffer, uint16_t usAddress, uint16_t u
 
 eMBErrorCode eMBRegInputCB(uint8_t *pucRegBuffer, uint16_t usAddress, uint16_t usNRegs)
 {
-    eMBErrorCode eStatus = MB_ENOERR;
-    uint16_t i;
-
-    if ((usAddress >= MB_REG_INPUT_START) && (usAddress + usNRegs <= MB_REG_INPUT_START + MB_REG_INPUT_NREGS))
-    {
-        for (i = ((usAddress - MB_REG_INPUT_START) >> 1U); i < usNRegs; i++)
-        {
-            *pucRegBuffer++ = (uint8_t)(mbRegInputBuf[i] >> 8U);
-            *pucRegBuffer++ = (uint8_t)(mbRegInputBuf[i] & 0xFFU);
-        }
-    }
-    else
-    {
-        eStatus = MB_ENOREG;
-    }
-
-    return eStatus;
+    return MB_ENOREG;
 }
 
 eMBErrorCode eMBRegHoldingCB(uint8_t *pucRegBuffer, uint16_t usAddress, uint16_t usNRegs, eMBRegisterMode eMode)
@@ -99,28 +91,69 @@ void Modbus_Ctor(void)
     QMutex_init(&me->mutex, QF_MAX_ACTIVE);
 }
 
-bool Modbus_Read(uint16_t *buffer, uint16_t address, uint16_t num, modbus_data_type_t type)
+bool Modbus_Read(uint8_t *buffer, uint16_t offset, uint16_t num, modbus_data_type_t type)
 {
     modbus_t *const me = &l_modbus;
-    bool result;
+    bool result = true;
+    uint16_t i;
 
     QMutex_lock(&me->mutex);
     switch (type)
     {
         case MODBUS_DataType_Discrete:
-            result = true;
+            if ((offset < MODBUS_DISCRETE_SIZE) && ((offset + num) <= MODBUS_DISCRETE_SIZE))
+            {
+                for (i = offset; i < (offset + num); i++)
+                {
+                    buffer[i - offset] = mbRegDiscreteBuf[i];
+                }
+            }
+            else
+            {
+                result = false;
+            }
             break;
 
         case MODBUS_DataType_Coils:
-            result = true;
+            if ((offset < MODBUS_COILS_SIZE) && ((offset + num) <= MODBUS_COILS_SIZE))
+            {
+                for (i = offset; i < (offset + num); i++)
+                {
+                    buffer[i - offset] = mbRegCoilsBuf[i];
+                }
+            }
+            else
+            {
+                result = false;
+            }
             break;
 
         case MODBUS_DataType_Input:
-            result = true;
+            if ((offset < MODBUS_INPUT_SIZE) && ((offset + num) <= MODBUS_INPUT_SIZE))
+            {
+                for (i = offset; i < (offset + num); i++)
+                {
+                    buffer[i - offset] = mbRegInputBuf[i];
+                }
+            }
+            else
+            {
+                result = false;
+            }
             break;
 
         case MODBUS_DataType_Holding:
-            result = true;
+            if ((offset < MODBUS_HOLDING_SIZE) && ((offset + num) <= MODBUS_HOLDING_SIZE))
+            {
+                for (i = offset; i < (offset + num); i++)
+                {
+                    buffer[i - offset] = mbRegHoldingBuf[i];
+                }
+            }
+            else
+            {
+                result = false;
+            }
             break;
 
         default:
@@ -131,28 +164,69 @@ bool Modbus_Read(uint16_t *buffer, uint16_t address, uint16_t num, modbus_data_t
     return result;
 }
 
-bool Modbus_Write(uint16_t *buffer, uint16_t address, uint16_t num, modbus_data_type_t type)
+bool Modbus_Write(uint8_t *buffer, uint16_t offset, uint16_t num, modbus_data_type_t type)
 {
     modbus_t *const me = &l_modbus;
-    bool result;
+    bool result = true;
+    uint16_t i;
 
     QMutex_lock(&me->mutex);
     switch (type)
     {
         case MODBUS_DataType_Discrete:
-            result = true;
+            if ((offset < MODBUS_DISCRETE_SIZE) && ((offset + num) <= MODBUS_DISCRETE_SIZE))
+            {
+                for (i = offset; i < (offset + num); i++)
+                {
+                    mbRegDiscreteBuf[i] = buffer[i - offset];
+                }
+            }
+            else
+            {
+                result = false;
+            }
             break;
 
         case MODBUS_DataType_Coils:
-            result = true;
+            if ((offset < MODBUS_COILS_SIZE) && ((offset + num) <= MODBUS_COILS_SIZE))
+            {
+                for (i = offset; i < (offset + num); i++)
+                {
+                    mbRegCoilsBuf[i] = buffer[i - offset];
+                }
+            }
+            else
+            {
+                result = false;
+            }
             break;
 
         case MODBUS_DataType_Input:
-            result = true;
+            if ((offset < MODBUS_INPUT_SIZE) && ((offset + num) <= MODBUS_INPUT_SIZE))
+            {
+                for (i = offset; i < (offset + num); i++)
+                {
+                    mbRegInputBuf[i] = buffer[i - offset];
+                }
+            }
+            else
+            {
+                result = false;
+            }
             break;
 
         case MODBUS_DataType_Holding:
-            result = true;
+            if ((offset < MODBUS_HOLDING_SIZE) && ((offset + num) <= MODBUS_HOLDING_SIZE))
+            {
+                for (i = offset; i < (offset + num); i++)
+                {
+                    mbRegHoldingBuf[i] = buffer[i - offset];
+                }
+            }
+            else
+            {
+                result = false;
+            }
             break;
 
         default:

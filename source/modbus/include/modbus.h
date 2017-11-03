@@ -22,15 +22,6 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
-#define MB_REG_DISCRETE_START (0x0U)
-#define MB_REG_DISCRETE_NREGS (1U)
-#define MB_REG_COILS_START (0x0U)
-#define MB_REG_COILS_NREGS (1U)
-#define MB_REG_INPUT_START (0x0U)
-#define MB_REG_INPUT_NREGS (1U)
-#define MB_REG_HOLDING_START (0x0U)
-#define MB_REG_HOLDING_NREGS (1U)
-
 typedef enum _modbus_data_type {
     MODBUS_DataType_Discrete = 0U,
     MODBUS_DataType_Coils = 1U,
@@ -49,8 +40,8 @@ extern "C" {
 #endif /* __cplusplus */
 
 void Modbus_Ctor(void);
-bool Modbus_Read(uint16_t *buffer, uint16_t address, uint16_t num, modbus_data_type_t type);
-bool Modbus_Write(uint16_t *buffer, uint16_t address, uint16_t num, modbus_data_type_t type);
+bool Modbus_Read(uint8_t *buffer, uint16_t offset, uint16_t num, modbus_data_type_t type);
+bool Modbus_Write(uint8_t *buffer, uint16_t offset, uint16_t num, modbus_data_type_t type);
 
 #if defined(__cplusplus)
 }
