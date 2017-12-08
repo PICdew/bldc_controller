@@ -23,6 +23,20 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
+typedef enum _modbus_data_type {
+    MODBUS_DataType_Discrete = 0U,
+    MODBUS_DataType_Coils = 1U,
+    MODBUS_DataType_Input = 2U,
+    MODBUS_DataType_Holding = 3U,
+} modbus_data_type_t;
+
+typedef struct _modbus_update_evt {
+    QEvt super;
+    modbus_data_type_t type;
+    uint16_t offset;
+    uint16_t num;
+} modbus_update_evt_t;
+
 extern QActive *const AO_Modbus;
 
 /*******************************************************************************
@@ -34,6 +48,8 @@ extern "C" {
 #endif /* __cplusplus */
 
 void Modbus_Ctor(void);
+bool Modbus_Read(uint8_t *buffer, uint16_t offset, uint16_t num, modbus_data_type_t type);
+bool Modbus_Write(uint8_t *buffer, uint16_t offset, uint16_t num, modbus_data_type_t type);
 
 #if defined(__cplusplus)
 }

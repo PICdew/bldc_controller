@@ -23,13 +23,21 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
-#define MB_EXECUTE_PERIOD (10U)
-#define MB_SLAVE_ADDRESS  (0x01U)
-#define MB_PORT           (0U)
-#define MB_BAUD_RATE      (9600U)
+#define MODBUS_DISCRETE_START (0x1000U)
+#define MODBUS_DISCRETE_BUF_SIZE (16U)
+#define MODBUS_COILS_START (0x2000U)
+#define MODBUS_COILS_BUF_SIZE (16U)
+#define MODBUS_INPUT_START (0x3000U)
+#define MODBUS_INPUT_BUF_SIZE (16U)
+#define MODBUS_HOLDING_START (0x4000U)
+#define MODBUS_HOLDING_BUF_SIZE (16U)
+#define MODBUS_EXECUTE_PERIOD (10U)
+#define MODBUS_SLAVE_ADDRESS (0x01U)
+#define MODBUS_PORT (0U)
+#define MODBUS_BAUD_RATE (9600U)
 
 typedef struct _modbus
-{
+{                     /* the Blinky active object */
     QActive super;    /* inherit QActive */
     QTimeEvt timeEvt; /* private time event generator */
 } modbus_t;
@@ -44,6 +52,10 @@ static QState Modbus_Running(modbus_t *const me, QEvt const *const e);
  * Variables
  ******************************************************************************/
 static modbus_t l_modbus;
+// static uint8_t mbRegDiscreteBuf[MODBUS_DISCRETE_BUF_SIZE] = {0U};
+// static uint8_t mbRegCoilsBuf[MODBUS_COILS_BUF_SIZE] = {0U};
+// static uint8_t mbRegInputBuf[MODBUS_INPUT_BUF_SIZE] = {0U};
+// static uint8_t mbRegHoldingBuf[MODBUS_HOLDING_BUF_SIZE] = {0U};
 QActive *const AO_Modbus = &l_modbus.super;
 
 /*******************************************************************************
@@ -82,7 +94,7 @@ QState Modbus_Initial(modbus_t *const me, QEvt const *const e)
     (void)e; /* avoid compiler warning about unused parameter */
 
     /* Initialize the Modbus protocol stack. */
-    (void)eMBInit(MB_RTU, MB_SLAVE_ADDRESS, MB_PORT, MB_BAUD_RATE, MB_PAR_NONE);
+    (void)eMBInit(MB_RTU, MODBUS_SLAVE_ADDRESS, MODBUS_PORT, MODBUS_BAUD_RATE, MB_PAR_NONE);
 
     return Q_TRAN(&Modbus_Running);
 }
@@ -97,8 +109,8 @@ QState Modbus_Running(modbus_t *const me, QEvt const *const e)
         {
             /* Enable the Modbus protocol stack */
             (void)eMBEnable();
-            /* arm the time event to expire in MB_EXECUTE_PERIOD ms */
-            QTimeEvt_armX(&me->timeEvt, MB_EXECUTE_PERIOD, MB_EXECUTE_PERIOD);
+            /* arm the time event to expire in MODBUS_EXECUTE_PERIOD ms */
+            QTimeEvt_armX(&me->timeEvt, MODBUS_EXECUTE_PERIOD, MODBUS_EXECUTE_PERIOD);
 
             status = Q_HANDLED();
             break;
