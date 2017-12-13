@@ -30,7 +30,8 @@ typedef enum _modbus_data_type {
     MODBUS_DataType_Holding = 3U,
 } modbus_data_type_t;
 
-typedef struct _modbus_update_evt {
+typedef struct _modbus_update_evt
+{
     QEvt super;
     modbus_data_type_t type;
     uint16_t offset;
