@@ -40,6 +40,8 @@
 #ifndef qep_port_h
 #define qep_port_h
 
+#define Q_SIGNAL_SIZE (2)
+
 #include <stdint.h>  /* Exact-width types. WG14/N843 C99 Standard */
 #include <stdbool.h> /* Boolean type.      WG14/N843 C99 Standard */
 
