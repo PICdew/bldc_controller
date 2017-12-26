@@ -23,15 +23,16 @@
 /*******************************************************************************
  * Variables
  ******************************************************************************/
-/* Event queue storage for Blinky */
-static QEvt const *l_blinkyQSto[10U];
-static QEvt const *l_modbusQSto[10U];
 
 /*******************************************************************************
  * Code
  ******************************************************************************/
 int main(void)
 {
+    /* Event queue storage for Blinky */
+    static QEvt const *l_blinkyQSto[10U];
+    static QEvt const *l_modbusQSto[10U];
+
     /* Instantiate all active objects */
     Blinky_Ctor();
     Modbus_Ctor();
