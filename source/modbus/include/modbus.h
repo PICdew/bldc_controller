@@ -49,8 +49,6 @@ extern "C" {
 #endif /* __cplusplus */
 
 void Modbus_Ctor(void);
-bool Modbus_Read(uint8_t *buffer, uint16_t offset, uint16_t num, modbus_data_type_t type);
-bool Modbus_Write(uint8_t *buffer, uint16_t offset, uint16_t num, modbus_data_type_t type);
 
 #if defined(__cplusplus)
 }

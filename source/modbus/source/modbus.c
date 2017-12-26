@@ -23,18 +23,18 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
-#define MODBUS_DISCRETE_START (0x1000U)
+#define MODBUS_DISCRETE_START    (0x1000U)
 #define MODBUS_DISCRETE_BUF_SIZE (16U)
-#define MODBUS_COILS_START (0x2000U)
-#define MODBUS_COILS_BUF_SIZE (16U)
-#define MODBUS_INPUT_START (0x3000U)
-#define MODBUS_INPUT_BUF_SIZE (16U)
-#define MODBUS_HOLDING_START (0x4000U)
-#define MODBUS_HOLDING_BUF_SIZE (16U)
-#define MODBUS_EXECUTE_PERIOD (10U)
-#define MODBUS_SLAVE_ADDRESS (0x01U)
-#define MODBUS_PORT (0U)
-#define MODBUS_BAUD_RATE (9600U)
+#define MODBUS_COILS_START       (0x2000U)
+#define MODBUS_COILS_BUF_SIZE    (16U)
+#define MODBUS_INPUT_START       (0x3000U)
+#define MODBUS_INPUT_BUF_SIZE    (16U)
+#define MODBUS_HOLDING_START     (0x4000U)
+#define MODBUS_HOLDING_BUF_SIZE  (16U)
+#define MODBUS_EXECUTE_PERIOD    (10U)
+#define MODBUS_SLAVE_ADDRESS     (0x01U)
+#define MODBUS_PORT              (0U)
+#define MODBUS_BAUD_RATE         (9600U)
 
 typedef struct _modbus
 {                     /* the Blinky active object */
@@ -89,7 +89,7 @@ void Modbus_Ctor(void)
     QTimeEvt_ctorX(&me->timeEvt, &me->super, MODBUS_TICK_SIG, 0U);
 }
 
-QState Modbus_Initial(modbus_t *const me, QEvt const *const e)
+static QState Modbus_Initial(modbus_t *const me, QEvt const *const e)
 {
     (void)e; /* avoid compiler warning about unused parameter */
 
@@ -99,7 +99,7 @@ QState Modbus_Initial(modbus_t *const me, QEvt const *const e)
     return Q_TRAN(&Modbus_Running);
 }
 
-QState Modbus_Running(modbus_t *const me, QEvt const *const e)
+static QState Modbus_Running(modbus_t *const me, QEvt const *const e)
 {
     QState status;
 
