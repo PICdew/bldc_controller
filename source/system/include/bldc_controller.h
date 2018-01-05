@@ -28,7 +28,7 @@ enum _bldc_controller_signals
     MODBUS_TICK_SIG,          /* tick signal for Modbus Stack */
     MODBUS_READ_OBJ_SIG,
     MODBUS_WRITE_OBJ_SIG,
-    MAX_SIG                   /* the last signal (keep always last) */
+    MAX_SIG /* the last signal (keep always last) */
 };
 
 #endif /* __BLDC_CONTROLLER__ */

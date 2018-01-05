@@ -19,27 +19,24 @@
 #include "bsp.h"
 #include "mb.h"
 #include "modbus.h"
+#include "modbus_conf.h"
 
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
-#define MODBUS_DISCRETE_START    (0x1000U)
-#define MODBUS_DISCRETE_BUF_SIZE (16U)
-#define MODBUS_COILS_START       (0x2000U)
-#define MODBUS_COILS_BUF_SIZE    (16U)
-#define MODBUS_INPUT_START       (0x3000U)
-#define MODBUS_INPUT_BUF_SIZE    (16U)
-#define MODBUS_HOLDING_START     (0x4000U)
-#define MODBUS_HOLDING_BUF_SIZE  (16U)
-#define MODBUS_EXECUTE_PERIOD    (10U)
-#define MODBUS_SLAVE_ADDRESS     (0x01U)
-#define MODBUS_PORT              (0U)
-#define MODBUS_BAUD_RATE         (9600U)
+typedef struct _modbus_section
+{
+    modbus_callback_t callback;
+    modbus_data_type_t type;
+    uint16_t address;
+    uint16_t size;
+} modbus_section_t;
 
 typedef struct _modbus
-{                     /* the Blinky active object */
-    QActive super;    /* inherit QActive */
-    QTimeEvt timeEvt; /* private time event generator */
+{                                                 /* the Blinky active object */
+    QActive super;                                /* inherit QActive */
+    QTimeEvt timeEvt;                             /* private time event generator */
+    modbus_section_t section[MODBUS_MAX_SECTION]; /* section used to store client information */
 } modbus_t;
 
 /*******************************************************************************
@@ -52,10 +49,6 @@ static QState Modbus_Running(modbus_t *const me, QEvt const *const e);
  * Variables
  ******************************************************************************/
 static modbus_t l_modbus;
-// static uint8_t mbRegDiscreteBuf[MODBUS_DISCRETE_BUF_SIZE] = {0U};
-// static uint8_t mbRegCoilsBuf[MODBUS_COILS_BUF_SIZE] = {0U};
-// static uint8_t mbRegInputBuf[MODBUS_INPUT_BUF_SIZE] = {0U};
-// static uint8_t mbRegHoldingBuf[MODBUS_HOLDING_BUF_SIZE] = {0U};
 QActive *const AO_Modbus = &l_modbus.super;
 
 /*******************************************************************************
@@ -87,6 +80,16 @@ void Modbus_Ctor(void)
 
     QActive_ctor(&me->super, Q_STATE_CAST(&Modbus_Initial));
     QTimeEvt_ctorX(&me->timeEvt, &me->super, MODBUS_TICK_SIG, 0U);
+}
+
+bool Modbus_Subscibe(
+    uint8_t section, modbus_data_type_t type, uint16_t address, uint16_t size, modbus_callback_t callback)
+{
+    return true;
+}
+
+void Modbus_Unsubscribe(uint8_t section)
+{
 }
 
 static QState Modbus_Initial(modbus_t *const me, QEvt const *const e)
