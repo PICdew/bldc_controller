@@ -21,8 +21,8 @@ for root, dirs, files in os.walk(path):
                 break
 
         if ((name.endswith(".h") or name.endswith(".c")) and needFormat):
-            print('[Process]' + localpath)
+            print '[Process]' + localpath
             os.system(
                 path + "/bin/clang-format -i %s -style=File -sort-includes=false" % (localpath))
 
-input("Press any key to continue...")
+raw_input("Press any key to continue...")
