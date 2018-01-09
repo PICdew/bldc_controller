@@ -23,12 +23,14 @@
 enum _bldc_controller_signals
 {
     TIMEOUT_SIG = Q_USER_SIG, /* the last published signal */
-    MODBUS_UPDATE_OBJ_SIG,    /* Modbus data object update notification */
+    MODBUS_UPDATE_SIG,        /* Modbus data object update notification */
     MAX_PUB_SIG,              /* the last published signal */
     MODBUS_TICK_SIG,          /* tick signal for Modbus Stack */
-    MODBUS_READ_OBJ_SIG,
-    MODBUS_WRITE_OBJ_SIG,
-    MAX_SIG /* the last signal (keep always last) */
+    MODBUS_READ_SIG,          /* read Modbus data object */
+    MODBUS_READ_ACK_SIG,      /* read Modbus data object ack */
+    MODBUS_WRITE_SIG,         /* write Modbus data object */
+    MODBUS_WRITE_ACK_SIG,     /* write Modbus data object ack */
+    MAX_SIG                   /* the last signal (keep always last) */
 };
 
 #endif /* __BLDC_CONTROLLER__ */
