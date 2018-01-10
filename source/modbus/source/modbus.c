@@ -24,19 +24,10 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
-typedef struct _modbus_section
-{
-    modbus_callback_t callback;
-    modbus_data_type_t type;
-    uint16_t address;
-    uint16_t size;
-} modbus_section_t;
-
 typedef struct _modbus
 {                                                 /* the Blinky active object */
     QActive super;                                /* inherit QActive */
     QTimeEvt timeEvt;                             /* private time event generator */
-    modbus_section_t section[MODBUS_MAX_SECTION]; /* section used to store client information */
 } modbus_t;
 
 /*******************************************************************************
@@ -80,16 +71,6 @@ void Modbus_Ctor(void)
 
     QActive_ctor(&me->super, Q_STATE_CAST(&Modbus_Initial));
     QTimeEvt_ctorX(&me->timeEvt, &me->super, MODBUS_TICK_SIG, 0U);
-}
-
-bool Modbus_Subscibe(
-    uint8_t section, modbus_data_type_t type, uint16_t address, uint16_t size, modbus_callback_t callback)
-{
-    return true;
-}
-
-void Modbus_Unsubscribe(uint8_t section)
-{
 }
 
 static QState Modbus_Initial(modbus_t *const me, QEvt const *const e)

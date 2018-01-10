@@ -60,9 +60,6 @@ extern "C" {
 #endif /* __cplusplus */
 
 void Modbus_Ctor(void);
-bool Modbus_Subscibe(
-    uint8_t section, modbus_data_type_t type, uint16_t address, uint16_t size, modbus_callback_t callback);
-void Modbus_Unsubscribe(uint8_t section);
 
 #if defined(__cplusplus)
 }
