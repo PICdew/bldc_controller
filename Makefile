@@ -52,6 +52,7 @@ INCLUDES  = \
 	-Isource/system/include \
 	-Isource/blinky/include \
 	-Isource/modbus/include \
+	-Isource/modbus/source \
 	-Isource/motor_ctrl/include
 
 #-----------------------------------------------------------------------------

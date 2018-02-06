@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Wang Ge
+ * Copyright (C) 2018 Wang Ge
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,33 +14,16 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __MODBUS_H__
-#define __MODBUS_H__
+#ifndef __MODBUS_CONF_H__
+#define __MODBUS_CONF_H__
 
-#include <stdbool.h>
-#include "qpc.h"
-#include "mb.h"
+/* Modbus Slave Stack configurations. */
+#define MODBUS_SLAVE_ADDRESS (0x01U)
+#define MODBUS_PORT (0U)
+#define MODBUS_BAUD_RATE (9600U)
+#define MODBUS_EXECUTE_PERIOD (10U)
 
-/*******************************************************************************
- * Definitions
- ******************************************************************************/
-extern QActive *const AO_Modbus;
-
-/*******************************************************************************
- * API
- ******************************************************************************/
-
-#if defined(__cplusplus)
-extern "C" {
-#endif /* __cplusplus */
-
-void Modbus_Ctor(void);
-
-#if defined(__cplusplus)
-}
-#endif /* __cplusplus */
-
-#endif /* __MODBUS_H__ */
+#endif /* __MODBUS_CONF_H__ */
 
 /*******************************************************************************
  * EOF
