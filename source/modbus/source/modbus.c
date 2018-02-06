@@ -25,9 +25,9 @@
  * Definitions
  ******************************************************************************/
 typedef struct _modbus
-{                                                 /* the Blinky active object */
-    QActive super;                                /* inherit QActive */
-    QTimeEvt timeEvt;                             /* private time event generator */
+{                     /* the Blinky active object */
+    QActive super;    /* inherit QActive */
+    QTimeEvt timeEvt; /* private time event generator */
 } modbus_t;
 
 /*******************************************************************************
