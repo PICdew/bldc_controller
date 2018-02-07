@@ -30,6 +30,9 @@ typedef struct _modbus
     QTimeEvt timeEvt; /* private time event generator */
 } modbus_t;
 
+#define REG_INPUT_START 1000
+#define REG_INPUT_NREGS 4
+
 /*******************************************************************************
  * Prototypes
  ******************************************************************************/
@@ -41,6 +44,8 @@ static QState Modbus_Running(modbus_t *const me, QEvt const *const e);
  ******************************************************************************/
 static modbus_t l_modbus;
 QActive *const AO_Modbus = &l_modbus.super;
+static USHORT usRegInputStart = REG_INPUT_START;
+static USHORT usRegInputBuf[REG_INPUT_NREGS] = {0x11, 0x22, 0x33, 0x44};
 
 /*******************************************************************************
  * Code
@@ -57,7 +62,27 @@ eMBErrorCode eMBRegCoilsCB(uint8_t *pucRegBuffer, uint16_t usAddress, uint16_t u
 
 eMBErrorCode eMBRegInputCB(uint8_t *pucRegBuffer, uint16_t usAddress, uint16_t usNRegs)
 {
-    return MB_ENOREG;
+    eMBErrorCode eStatus = MB_ENOERR;
+    int iRegIndex;
+
+    usAddress--;
+    if ((usAddress >= REG_INPUT_START) && (usAddress + usNRegs <= REG_INPUT_START + REG_INPUT_NREGS))
+    {
+        iRegIndex = (int)(usAddress - usRegInputStart);
+        while (usNRegs > 0)
+        {
+            *pucRegBuffer++ = (unsigned char)(usRegInputBuf[iRegIndex] >> 8);
+            *pucRegBuffer++ = (unsigned char)(usRegInputBuf[iRegIndex] & 0xFF);
+            iRegIndex++;
+            usNRegs--;
+        }
+    }
+    else
+    {
+        eStatus = MB_ENOREG;
+    }
+
+    return eStatus;
 }
 
 eMBErrorCode eMBRegHoldingCB(uint8_t *pucRegBuffer, uint16_t usAddress, uint16_t usNRegs, eMBRegisterMode eMode)
