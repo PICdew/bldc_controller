@@ -26,11 +26,25 @@
 void vMBPortSerialEnable(BOOL xRxEnable, BOOL xTxEnable)
 {
     /* Handle UART Rx Enable/Disable */
-    __write_to_IEC(IEC0bits.U1RXIE = (TRUE == xRxEnable) ? 1U : 0U);
+    if (xRxEnable)
+    {
+        __write_to_IEC(IEC0bits.U1RXIE = 1U);
+    }
+    else
+    {
+        __write_to_IEC(IEC0bits.U1RXIE = 0U);
+    }
 
     /* Handle UART Tx Enable/Disable */
-    IFS0bits.U1TXIF = 1U;
-    __write_to_IEC(IEC0bits.U1TXIE = (TRUE == xTxEnable) ? 1U : 0U);
+    if (xTxEnable)
+    {
+        __write_to_IEC(IEC0bits.U1TXIE = 1U);
+        IFS0bits.U1TXIF = 1U;
+    }
+    else
+    {
+        __write_to_IEC(IEC0bits.U1TXIE = 0U);
+    }
 }
 
 BOOL xMBPortSerialInit(UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity eParity)
@@ -89,7 +103,7 @@ BOOL xMBPortSerialInit(UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBPari
 
         // UTXISEL0 TX_ONE_CHAR; UTXINV disabled; OERR NO_ERROR_cleared; URXISEL RX_ONE_CHAR; UTXBRK COMPLETED; UTXEN
         // disabled; ADDEN disabled;
-        U1STA = 0x0U;
+        U1STA = 0x2000U;
 
         U1MODEbits.UARTEN = 1U; // enabling UARTEN bit
         U1STAbits.UTXEN = 1U;
