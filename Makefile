@@ -97,7 +97,7 @@ FREEMODEBUS_SRCS := \
 	mbfuncinput.c \
 	mbfuncother.c \
 	mbutils.c \
-	portcrc.c \
+	mbcrc.c \
 	portevent.c \
 	portserial.c \
 	porttimer.c
