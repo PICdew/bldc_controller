@@ -42,6 +42,9 @@
 /* The maximum number of active objects in the application, see NOTE01 */
 #define QF_MAX_ACTIVE               (8)
 
+/* The maximum number of event pool in the application */
+#define QF_MAX_EPOOL                (3)
+
 #define QF_EVENT_SIZ_SIZE           (1)
 #define QF_EQUEUE_CTR_SIZE          (1)
 #define QF_MPOOL_SIZ_SIZE           (1)
