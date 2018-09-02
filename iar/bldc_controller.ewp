@@ -313,6 +313,11 @@
           <state>$PROJ_DIR$\..\src\lib\CMSIS\Device\ST\STM32F0xx\Include</state>
           <state>$PROJ_DIR$\..\src\system\inc</state>
           <state>$PROJ_DIR$\..\src\lib\CMSIS\Include</state>
+          <state>$PROJ_DIR$\..\src\config</state>
+          <state>$PROJ_DIR$\..\src\lib\qpn\include</state>
+          <state>$PROJ_DIR$\..\src\lib\qpn\ports\arm-cm\qv\iar</state>
+          <state>$PROJ_DIR$\..\src\board\inc</state>
+          <state>$PROJ_DIR$\..\src\configs</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -727,7 +732,7 @@
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>lnk0t.icf</state>
+          <state>$TOOLKIT_DIR$\config\linker\ST\stm32f031x6.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>
@@ -787,7 +792,7 @@
         </option>
         <option>
           <name>IlinkProgramEntryLabel</name>
-          <state></state>
+          <state>__iar_program_start</state>
         </option>
         <option>
           <name>DoFill</name>
@@ -1931,19 +1936,37 @@
     </settings>
   </configuration>
   <group>
-    <name>application</name>
+    <name>act_obj</name>
+  </group>
+  <group>
+    <name>board</name>
+    <file>
+      <name>$PROJ_DIR$\..\src\board\src\board.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\src\board\src\stm32f0xx_it.c</name>
+    </file>
   </group>
   <group>
     <name>device</name>
-  </group>
-  <group>
-    <name>init</name>
     <file>
-      <name>$PROJ_DIR$\..\src\init\main.c</name>
+      <name>$PROJ_DIR$\..\src\board\src\system_stm32f0xx.c</name>
     </file>
   </group>
   <group>
     <name>qpn</name>
+    <file>
+      <name>$PROJ_DIR$\..\src\lib\qpn\src\qfn\qepn.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\src\lib\qpn\src\qfn\qfn.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\src\lib\qpn\src\qvn\qvn.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\src\lib\qpn\ports\arm-cm\qv\iar\qvn_port.c</name>
+    </file>
   </group>
   <group>
     <name>startup</name>
@@ -1954,10 +1977,7 @@
   <group>
     <name>system</name>
     <file>
-      <name>$PROJ_DIR$\..\src\system\src\stm32f0xx_it.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\src\system\src\system_stm32f0xx.c</name>
+      <name>$PROJ_DIR$\..\src\system\src\main.c</name>
     </file>
   </group>
   <group>
