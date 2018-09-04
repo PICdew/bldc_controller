@@ -17,4 +17,17 @@
 #ifndef BLDC_CONTROLLER_H
 #define BLDC_CONTROLLER_H
 
+#include "blinky.h"
+
+/*******************************************************************************
+ * Definitions
+ ******************************************************************************/
+enum BlinkySignals {
+    DUMMY_SIG = Q_USER_SIG,
+    MAX_PUB_SIG,          /* the last published signal */
+
+    TIMEOUT_SIG,
+    MAX_SIG               /* the last signal */
+};
+
 #endif /* BLDC_CONTROLLER_H */

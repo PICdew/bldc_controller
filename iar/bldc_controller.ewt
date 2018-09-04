@@ -2315,15 +2315,18 @@
     </settings>
   </configuration>
   <group>
-    <name>act_obj</name>
+    <name>application</name>
+    <group>
+      <name>blinky</name>
+      <file>
+        <name>$PROJ_DIR$\..\src\application\blinky\src\blinky.c</name>
+      </file>
+    </group>
   </group>
   <group>
     <name>board</name>
     <file>
       <name>$PROJ_DIR$\..\src\board\src\board.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\src\board\src\stm32f0xx_it.c</name>
     </file>
   </group>
   <group>

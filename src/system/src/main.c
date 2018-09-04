@@ -19,13 +19,30 @@
 #include "bldc_controller.h"
 
 /*******************************************************************************
+ * Definitions
+ ******************************************************************************/
+static QEvt l_blinkyQSto[10];
+QActiveCB const Q_ROM QF_active[] = {
+    { (QActive *)0,           (QEvt *)0,        0U                      },
+    { (QActive *)&AO_Blinky,  l_blinkyQSto,     Q_DIM(l_blinkyQSto)     }
+};
+
+/*******************************************************************************
  * Code
  ******************************************************************************/
 int main(void)
 {
+    /* Instantiate the AOs */
+    Blinky_ctor();
+
+    /* Initialize the QF-nano framework */
+    QF_init(Q_DIM(QF_active));
+
+    /* Initialize the Board Support Package */
     BOARD_Init();
 
-    return 0;
+    /* Transfer control to QF-nano */
+    return QF_run();
 }
 
 /*******************************************************************************
