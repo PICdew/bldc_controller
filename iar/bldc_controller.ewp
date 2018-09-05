@@ -182,6 +182,7 @@
         <option>
           <name>CCDefines</name>
           <state>STM32F031x6</state>
+          <state>USE_FULL_LL_DRIVER</state>
         </option>
         <option>
           <name>CCPreprocFile</name>
@@ -319,6 +320,7 @@
           <state>$PROJ_DIR$\..\src\board\inc</state>
           <state>$PROJ_DIR$\..\src\configs</state>
           <state>$PROJ_DIR$\..\src\application\blinky\inc</state>
+          <state>$PROJ_DIR$\..\src\lib\STM32F0xx_HAL_Driver\Inc</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1953,6 +1955,15 @@
   </group>
   <group>
     <name>device</name>
+    <group>
+      <name>hal</name>
+      <file>
+        <name>$PROJ_DIR$\..\src\lib\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_gpio.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\src\lib\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_rcc.c</name>
+      </file>
+    </group>
     <file>
       <name>$PROJ_DIR$\..\src\board\src\system_stm32f0xx.c</name>
     </file>

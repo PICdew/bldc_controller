@@ -32,15 +32,8 @@ extern "C"
 #endif
 
 void BOARD_Init(void);
-
-static inline void BOARD_ledOff(void)
-{
-}
-
-static inline void BOARD_ledOn(void)
-{
-}
-
+void BOARD_ledOff(void);
+void BOARD_ledOn(void);
 
 #ifdef __cplusplus
 }
