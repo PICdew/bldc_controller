@@ -23,6 +23,32 @@
 #include "board.h"
 
 /*******************************************************************************
+ * Definitions
+ ******************************************************************************/
+#define BOARD_CLOCK_STARTUP_TIMEOUT (0x500U)
+#define BOARD_CLOCK_CHECK_READY(x, y)              \
+    do                                             \
+    {                                              \
+        uint16_t startupCounter = 0U;              \
+        uint32_t ready = false;                    \
+                                                   \
+        do                                         \
+        {                                          \
+            ready = x;                             \
+            startupCounter++;                      \
+        } while (!ready && (startupCounter <= y)); \
+        if (!ready)                                \
+        {                                          \
+            while (1U)                             \
+            {                                      \
+            }                                      \
+        }                                          \
+        else                                       \
+        {                                          \
+        }                                          \
+    } while (0U)
+
+/*******************************************************************************
  * Code
  ******************************************************************************/
 static void BOARD_Clock_Init(void)
@@ -30,9 +56,7 @@ static void BOARD_Clock_Init(void)
     /* Disable PLL */
     LL_RCC_PLL_Disable();
     /* Wait until PLL is stoped */
-    while (LL_RCC_PLL_IsReady())
-    {
-    }
+    BOARD_CLOCK_CHECK_READY(!LL_RCC_PLL_IsReady(), BOARD_CLOCK_STARTUP_TIMEOUT);
 
     /* Setup PLL */
     LL_RCC_PLL_ConfigDomain_SYS(LL_RCC_PLLSOURCE_HSI_DIV_2, LL_RCC_PLL_MUL_12);
@@ -40,16 +64,12 @@ static void BOARD_Clock_Init(void)
     /* Enable PLL */
     LL_RCC_PLL_Enable();
     /* Wait until PLL is ready */
-    while (!LL_RCC_PLL_IsReady())
-    {
-    }
+    BOARD_CLOCK_CHECK_READY(LL_RCC_PLL_IsReady(), BOARD_CLOCK_STARTUP_TIMEOUT);
 
     /* Switch to HSI with PLL */
     LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_PLL);
     /* Wait until Clock is switched */
-    while (LL_RCC_SYS_CLKSOURCE_STATUS_PLL != LL_RCC_GetSysClkSource())
-    {
-    }
+    BOARD_CLOCK_CHECK_READY((LL_RCC_SYS_CLKSOURCE_STATUS_PLL == LL_RCC_GetSysClkSource()), BOARD_CLOCK_STARTUP_TIMEOUT);
 
     /* Enable peripheral clocks */
     LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOF);
