@@ -87,6 +87,7 @@ static void BOARD_LED_Init(void)
     gpioInitConfig.Alternate = LL_GPIO_AF_0;
 
     /* Initialize LED pins */
+    LL_GPIO_SetOutputPin(GPIOF, LL_GPIO_PIN_0 | LL_GPIO_PIN_1);
     LL_GPIO_Init(GPIOF, &gpioInitConfig);
 }
 
