@@ -1963,6 +1963,9 @@
       <file>
         <name>$PROJ_DIR$\..\src\lib\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_rcc.c</name>
       </file>
+      <file>
+        <name>$PROJ_DIR$\..\src\lib\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_tim.c</name>
+      </file>
     </group>
     <file>
       <name>$PROJ_DIR$\..\src\board\src\system_stm32f0xx.c</name>

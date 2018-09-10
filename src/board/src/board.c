@@ -20,6 +20,7 @@
 #include "stm32f0xx_ll_bus.h"
 #include "stm32f0xx_ll_gpio.h"
 #include "stm32f0xx_ll_rcc.h"
+#include "stm32f0xx_ll_tim.h"
 #include "board.h"
 
 /*******************************************************************************
@@ -74,6 +75,9 @@ static void BOARD_Clock_Init(void)
     /* Enable peripheral clocks */
     LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOF);
     (void)LL_AHB1_GRP1_IsEnabledClock(LL_AHB1_GRP1_PERIPH_GPIOF);
+
+    LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM14);
+    (void)LL_APB1_GRP1_IsEnabledClock(LL_APB1_GRP1_PERIPH_TIM14);
 }
 
 static void BOARD_LED_Init(void)
@@ -91,14 +95,31 @@ static void BOARD_LED_Init(void)
     LL_GPIO_Init(GPIOF, &gpioInitConfig);
 }
 
-void SysTick_Handler(void)
+void TIM14_IRQHandler(void)
 {
+    LL_TIM_ClearFlag_UPDATE(TIM14);
+
     QF_tickXISR(0U);
 }
 
 void QF_onStartup(void)
 {
-    SysTick_Config(SystemCoreClock / BOARD_TICKS_PER_SEC);
+    LL_TIM_InitTypeDef timerInitConfig;
+
+    LL_TIM_StructInit(&timerInitConfig);
+    timerInitConfig.Prescaler = 48U;
+    timerInitConfig.Autoreload = (SystemCoreClock / 48U) / BOARD_TICKS_PER_SEC;
+
+    /* Initialize TIM14 */
+    LL_TIM_Init(TIM14, &timerInitConfig);
+
+    /* Enable TIM14 Interrupt */
+    LL_TIM_ClearFlag_UPDATE(TIM14);
+    LL_TIM_EnableIT_UPDATE(TIM14);
+    NVIC_EnableIRQ(TIM14_IRQn);
+
+    /* Start Timer14 as systick */
+    LL_TIM_EnableCounter(TIM14);
 }
 
 void QV_onIdle(void)
