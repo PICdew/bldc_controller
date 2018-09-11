@@ -116,7 +116,6 @@ void QF_onStartup(void)
     /* Enable TIM14 Interrupt */
     LL_TIM_ClearFlag_UPDATE(TIM14);
     LL_TIM_EnableIT_UPDATE(TIM14);
-    NVIC_EnableIRQ(TIM14_IRQn);
 
     /* Start Timer14 as systick */
     LL_TIM_EnableCounter(TIM14);

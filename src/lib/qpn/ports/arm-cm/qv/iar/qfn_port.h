@@ -42,9 +42,11 @@
 /* QF interrupt disable/enable and log2()... */
 #if (__ARM_ARCH == 6) /* Cortex-M0/M0+/M1 ?, see NOTE1 */
 
+    #include "stm32f0xx.h"
+
     /* Cortex-M0/M0+/M1(v6-M, v6S-M) interrupt disabling policy, see NOTE2 */
-    #define QF_INT_DISABLE()    __disable_interrupt()
-    #define QF_INT_ENABLE()     __enable_interrupt()
+    #define QF_INT_DISABLE()    do { NVIC->ICER[0U] = 0xFFFFFFFF; } while(0U)
+    #define QF_INT_ENABLE()     do { NVIC->ISER[0U] = 0xFFFFFFFF; } while(0U)
 
     /* QF-aware ISR priority for CMSIS function NVIC_SetPriority(), NOTE1 */
     #define QF_AWARE_ISR_CMSIS_PRI 0
